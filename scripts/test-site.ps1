@@ -46,17 +46,17 @@ $requirements = @(
   @{ Pattern = 'figures/SechanOh_picture\.jpg'; Message = "index.html must reference the profile photo." },
   @{ Pattern = 'figures/brand-mark\.svg'; Message = "index.html must reference the editable brand mark asset." },
   @{ Pattern = 'content/site-config\.js'; Message = "index.html must load the editable content config." },
-  @{ Pattern = 'data-theme-option="dark"'; Message = "index.html must include the dark theme option." },
-  @{ Pattern = 'data-theme-option="light"'; Message = "index.html must include the light theme option." },
-  @{ Pattern = 'aria-label="Use dark theme"'; Message = "Dark theme control must be icon-only with an accessible label." },
-  @{ Pattern = 'aria-label="Use light theme"'; Message = "Light theme control must be icon-only with an accessible label." },
-  @{ Pattern = 'class="control-dot dark-dot"'; Message = "Dark theme control must use a circular visual button." },
-  @{ Pattern = 'class="control-dot light-dot"'; Message = "Light theme control must use a circular visual button." },
-  @{ Pattern = 'data-lang-option="en"'; Message = "Homepage must include an English language option." },
-  @{ Pattern = 'data-lang-option="ko"'; Message = "Homepage must include a Korean language option." },
+  @{ Pattern = 'class="theme-toggle single-toggle"'; Message = "Theme must use one toggle control." },
+  @{ Pattern = 'aria-label="Toggle color theme"'; Message = "Theme toggle must be a single accessible control." },
+  @{ Pattern = 'class="toggle-orb theme-orb"'; Message = "Theme toggle must use one small circular orb." },
+  @{ Pattern = 'class="language-toggle single-toggle"'; Message = "Language must use one toggle control." },
+  @{ Pattern = 'aria-label="Toggle language"'; Message = "Language toggle must be a single accessible control." },
+  @{ Pattern = 'data-lang-current="en"'; Message = "Homepage must track current language state." },
   @{ Pattern = 'class="nav-links"'; Message = "Navigation links must be grouped separately from controls." },
   @{ Pattern = 'class="nav-controls"'; Message = "Theme and language controls must be grouped at the far right." },
-  @{ Pattern = 'class="profile-stack hero-profile"'; Message = "Profile block must be placed before the hero copy." },
+  @{ Pattern = 'class="profile-panel hero-profile"'; Message = "Profile panel must be placed before the hero copy." },
+  @{ Pattern = 'class="profile-photo"'; Message = "Profile photo must be the left side of the profile panel." },
+  @{ Pattern = 'class="profile-signals"'; Message = "Signal capabilities must be the right side of the profile panel." },
   @{ Pattern = 'class="hero-copy"'; Message = "Hero copy must be explicitly separated after the profile block." },
   @{ Pattern = 'prefers-color-scheme: dark'; Message = "Default theme must follow the system color scheme." },
   @{ Pattern = 'class="brand-link" href="/"'; Message = "Brand mark must link back to the homepage." },
@@ -84,8 +84,16 @@ if ($html -match 'data-theme-option="system"') {
   throw "Theme toggle should expose only dark and light controls."
 }
 
-if ($html -match '>Dark</button>' -or $html -match '>Light</button>') {
-  throw "Theme controls should not expose visible Dark/Light text."
+if ($html -match 'data-theme-option="dark"' -or $html -match 'data-theme-option="light"') {
+  throw "Theme control should be one toggle, not two theme buttons."
+}
+
+if ($html -match 'data-lang-option="en"' -or $html -match 'data-lang-option="ko"') {
+  throw "Language control should be one toggle, not two language buttons."
+}
+
+if ($html -match '\.brand-text\s*\{\s*display:\s*none') {
+  throw "Brand text should remain visible on mobile."
 }
 
 if ($html -match '\.portrait-frame::after') {
