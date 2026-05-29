@@ -251,6 +251,24 @@
       gap: clamp(28px, 4vw, 46px);
     }
 
+    .hero-divider {
+      position: relative;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .hero-divider::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: -2px;
+      width: min(96px, 24%);
+      height: 5px;
+      border-radius: 999px;
+      background: var(--signal);
+      box-shadow: 0 0 18px var(--signal);
+    }
+
     .content-sections {
       display: grid;
       gap: 44px;
@@ -645,6 +663,8 @@
             </div>
           </div>
         </aside>
+
+        <div class="hero-divider" aria-hidden="true"></div>
 
         <div class="hero-copy">
           <h1 data-i18n="headline">Engineering signal from uncertainty.</h1>

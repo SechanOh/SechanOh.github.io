@@ -77,6 +77,8 @@ $requirements = @(
   @{ Pattern = 'grid-area:\s*meta'; Message = "Profile identity should be explicitly placed in the desktop composition." },
   @{ Pattern = 'grid-area:\s*signals'; Message = "Profile signal text should be explicitly placed in the desktop composition." },
   @{ Pattern = 'class="hero-copy"'; Message = "Hero copy must be explicitly separated after the profile block." },
+  @{ Pattern = 'class="hero-divider"'; Message = "Hero profile and main headline should have a visible separator." },
+  @{ Pattern = '\.hero-divider::before'; Message = "Hero divider should include a signal accent mark." },
   @{ Pattern = '\.hero-copy\s*\{[^}]*width:\s*100%'; Message = "Hero copy should use the same available width as the module sections." },
   @{ Pattern = '\.hero-copy\s*\{[^}]*max-width:\s*none'; Message = "Hero copy should not feel narrower than other modules." },
   @{ Pattern = '\.section-head p\s*\{[^}]*max-width:\s*none'; Message = "Section intro copy should use the full available content width." },
