@@ -121,11 +121,16 @@
     }
 
     header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
       padding: 22px 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
       font-family: var(--mono);
       font-size: 13px;
       color: var(--muted);
@@ -260,10 +265,9 @@
     }
 
     .section-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: end;
+      display: grid;
+      gap: 12px;
+      align-items: start;
       margin-bottom: 18px;
     }
 
@@ -281,7 +285,7 @@
 
     .section-head p {
       margin: 0;
-      max-width: 520px;
+      max-width: 720px;
       color: var(--muted);
       line-height: 1.55;
     }
@@ -472,10 +476,9 @@
     }
 
     .portrait-caption {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
+      display: grid;
+      justify-items: center;
+      gap: 2px;
       width: min(100%, 320px);
       padding: 11px 13px;
       border: 1px solid var(--line);
@@ -495,8 +498,7 @@
       overflow: hidden;
     }
 
-    .dossier-head,
-    .profile-signals-head {
+    .dossier-head {
       display: flex;
       justify-content: space-between;
       gap: 14px;
@@ -560,7 +562,6 @@
     @media (max-width: 880px) {
       .shell { width: min(100% - 24px, 620px); }
       header { align-items: center; gap: 10px; }
-      .brand-text span:last-child { display: none; }
       nav { gap: 8px; flex-wrap: nowrap; }
       .nav-links { gap: 9px; }
       .nav-controls { gap: 6px; }
@@ -568,19 +569,16 @@
       .hero-stack { align-items: start; }
       main { align-content: start; padding-top: 32px; }
       .card-grid { grid-template-columns: 1fr; }
-      .section-head,
       .note-item,
       .contact-panel { grid-template-columns: 1fr; display: grid; align-items: start; }
       h1 { font-size: clamp(38px, 11vw, 58px); }
       .summary { font-size: 18px; }
       .profile-panel { --portrait-size: 116px; grid-template-columns: auto minmax(0, 1fr); padding: 12px; gap: 10px; }
-      .profile-signals-head { padding: 10px 11px; font-size: 10px; }
       .profile-signals-body { padding: 11px; gap: 10px; }
       .signal-card { gap: 8px; }
       .signal-card strong { font-size: 12px; margin-bottom: 3px; }
       .signal-card span { font-size: 11px; line-height: 1.35; }
       .portrait-caption { width: auto; padding: 8px 10px; font-size: 10px; }
-      .portrait-caption span:last-child { display: none; }
     }
 
     @media (max-width: 560px) {
@@ -643,10 +641,6 @@
           </figure>
 
           <div class="profile-signals">
-            <div class="profile-signals-head">
-              <span data-i18n="brandName">Sechan Oh</span>
-              <span data-i18n="profileCaption">perception systems</span>
-            </div>
             <div class="profile-signals-body">
               <div class="signal-card">
                 <span class="dot"></span>

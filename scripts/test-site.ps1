@@ -69,6 +69,8 @@ $requirements = @(
   @{ Pattern = 'class="profile-photo"'; Message = "Profile photo must be the left side of the profile panel." },
   @{ Pattern = 'class="profile-signals"'; Message = "Signal capabilities must be the right side of the profile panel." },
   @{ Pattern = 'class="hero-copy"'; Message = "Hero copy must be explicitly separated after the profile block." },
+  @{ Pattern = 'position:\s*sticky'; Message = "Header must remain sticky while scrolling." },
+  @{ Pattern = '\.section-head\s*\{[^}]*display:\s*grid'; Message = "Section headings should stack title and copy vertically." },
   @{ Pattern = 'prefers-color-scheme: dark'; Message = "Default theme must follow the system color scheme." },
   @{ Pattern = 'class="brand-link" href="/"'; Message = "Brand mark must link back to the homepage." },
   @{ Pattern = 'class="brand-glyph"'; Message = "Brand mark must include a designed glyph." },
@@ -125,6 +127,22 @@ if ($html -match '@media \(max-width: 880px\)[\s\S]*?\.profile-panel\s*\{[^}]*gr
 
 if ($html -match '\.brand-text\s*\{\s*display:\s*none') {
   throw "Brand text should remain visible on mobile."
+}
+
+if ($html -match '\.brand-text\s+span:last-child\s*\{[^}]*display:\s*none') {
+  throw "Brand subtitle should remain visible on mobile."
+}
+
+if ($html -match '\.portrait-caption\s+span:last-child\s*\{[^}]*display:\s*none') {
+  throw "Portrait caption subtitle should remain visible on mobile."
+}
+
+if ($html -match 'profile-signals-head') {
+  throw "Profile signal panel should not repeat the name and perception systems label."
+}
+
+if ($html -match '\.section-head\s*\{[^}]*display:\s*flex') {
+  throw "Section headings should not use side-by-side flex layout."
 }
 
 if ($html -match '\.portrait-frame::after') {
