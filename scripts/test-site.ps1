@@ -80,7 +80,7 @@ $requirements = @(
   @{ Pattern = '\.hero-copy\s*\{[^}]*width:\s*100%'; Message = "Hero copy should use the same available width as the module sections." },
   @{ Pattern = '\.hero-copy\s*\{[^}]*max-width:\s*none'; Message = "Hero copy should not feel narrower than other modules." },
   @{ Pattern = '\.section-head p\s*\{[^}]*max-width:\s*none'; Message = "Section intro copy should use the full available content width." },
-  @{ Pattern = 'padding:\s*22px 18px'; Message = "Sticky header should include horizontal breathing room." },
+  @{ Pattern = 'padding:\s*22px 28px'; Message = "Sticky header should include stronger horizontal breathing room outside narrow mobile." },
   @{ Pattern = '\.section-title-group\s*\{[^}]*display:\s*grid'; Message = "Section kicker and title spacing should use one shared title group." },
   @{ Pattern = 'class="section-title-group"'; Message = "Work and Notes headings should use the shared title spacing group." },
   @{ Pattern = '\.module-card\s*\{[^}]*border:\s*1px solid var\(--line\)'; Message = "Homepage modules must share one bordered card design." },
@@ -151,6 +151,10 @@ if ($html -match 'font-size:\s*(9|10|11|12)px' -or $html -match 'font:\s*[^;]*(9
 
 if ($html -notmatch 'scroll-padding-top:\s*96px' -or $html -notmatch 'scroll-margin-top:\s*96px') {
   throw "Anchor navigation should account for the sticky header."
+}
+
+if ($html -notmatch '@media \(max-width: 560px\)[\s\S]*?header\s*\{[^}]*padding:\s*22px 0') {
+  throw "Very narrow mobile header should remove horizontal padding."
 }
 
 if ($html -match 'Detection, estimation, filtering, tracking, and interpretation under ambiguity') {
