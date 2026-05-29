@@ -37,10 +37,10 @@ if (-not (Test-Path $issueWorkflowPath)) {
   throw "GitHub Issues workflow documentation is missing."
 }
 
-$html = Get-Content -Raw -Path $indexPath
-$content = Get-Content -Raw -Path $contentPath
-$issueTemplate = Get-Content -Raw -Path $issueTemplatePath
-$issueWorkflow = Get-Content -Raw -Path $issueWorkflowPath
+$html = Get-Content -Raw -Encoding UTF8 -Path $indexPath
+$content = Get-Content -Raw -Encoding UTF8 -Path $contentPath
+$issueTemplate = Get-Content -Raw -Encoding UTF8 -Path $issueTemplatePath
+$issueWorkflow = Get-Content -Raw -Encoding UTF8 -Path $issueWorkflowPath
 
 $requirements = @(
   @{ Pattern = 'figures/SechanOh_picture\.jpg'; Message = "index.html must reference the profile photo." },
@@ -93,6 +93,7 @@ $requirements = @(
   @{ Pattern = 'prefers-color-scheme: dark'; Message = "Default theme must follow the system color scheme." },
   @{ Pattern = 'class="brand-link" href="/"'; Message = "Header brand must link back to the homepage." },
   @{ Pattern = 'class="brand-name"'; Message = "Header brand should show the Sechan Oh text label." },
+  @{ Pattern = 'class="brand-name" data-i18n="brandName"'; Message = "Header brand should be translated with the language toggle." },
   @{ Pattern = 'Last updated'; Message = "Homepage must visibly show a maintenance/update date." },
   @{ Pattern = 'May 29, 2026'; Message = "Homepage must show the current update date." },
   @{ Pattern = '--bg:\s*#e5edd6'; Message = "Light theme should use a more distinctive sage background." },
@@ -209,6 +210,26 @@ if ($html -match 'Multi-modal reasoning across imperfect measurements, timing, a
 
 if ($html -match 'class="brand-glyph"') {
   throw "Header brand should not show the favicon SVG mark."
+}
+
+foreach ($pattern in @(
+  'brandName:\s*"\uC624\uC138\uCC2C"',
+  'profileCaption:\s*"\uC778\uC9C0 \uC2DC\uC2A4\uD15C"',
+  'radarTitle:\s*"\uB808\uC774\uB354 \uCC98\uB9AC"',
+  'fusionTitle:\s*"\uC13C\uC11C \uC735\uD569"',
+  'notesKicker:\s*"\uAE30\uC220 \uB178\uD2B8"',
+  'contactKicker:\s*"\uC5F0\uB77D"',
+  'githubLabel:\s*"\uAE43\uD5C8\uBE0C"',
+  'emailLabel:\s*"\uC774\uBA54\uC77C"',
+  'pageTitle:\s*"\uC624\uC138\uCC2C \uD648\uD398\uC774\uC9C0"'
+)) {
+  if ($html -notmatch $pattern) {
+    throw "Korean language mode is missing expected translation pattern: $pattern"
+  }
+}
+
+if ($html -notmatch 'document\.title = dictionary\.pageTitle') {
+  throw "Language toggle should update the browser title."
 }
 
 if ($html -match 'class="eyebrow"' -or $html -match 'data-i18n="eyebrow"') {

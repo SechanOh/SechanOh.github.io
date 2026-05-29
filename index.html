@@ -600,7 +600,7 @@
   <div class="shell">
     <header>
       <a class="brand-link" href="/" aria-label="Go to Sechan Oh homepage">
-        <span class="brand-name">Sechan Oh</span>
+        <span class="brand-name" data-i18n="brandName">Sechan Oh</span>
       </a>
       <nav aria-label="Primary navigation">
         <div class="nav-links">
@@ -717,8 +717,8 @@
               <p data-i18n="contactBody">Reach out for radar signal processing, sensor fusion, perception systems, or research-minded engineering conversations.</p>
             </div>
             <div class="contact-links">
-              <a class="button primary" href="https://github.com/SechanOh">GitHub</a>
-              <a class="button" href="mailto:">Email</a>
+              <a class="button primary" href="https://github.com/SechanOh" data-i18n="githubLabel">GitHub</a>
+              <a class="button" href="mailto:" data-i18n="emailLabel">Email</a>
             </div>
           </div>
         </section>
@@ -812,6 +812,53 @@
       }
     };
 
+    Object.assign(translations.en, {
+      pageTitle: "Sechan Oh Homepage",
+      githubLabel: "GitHub",
+      emailLabel: "Email"
+    });
+
+    Object.assign(translations.ko, {
+      pageTitle: "오세찬 홈페이지",
+      brandName: "오세찬",
+      brandSubtitle: "신호 시스템",
+      navWork: "작업",
+      navNotes: "기술 노트",
+      navContact: "연락",
+      profileCaption: "인지 시스템",
+      radarTitle: "레이더 처리",
+      radarBody: "원시 레이더 반사를 안정적인 탐지, 추적, 해석 가능한 움직임 단서로 바꿉니다.",
+      fusionTitle: "센서 융합",
+      fusionBody: "완벽하지 않은 센서들을 시간과 신뢰도 기준으로 정렬해 하나의 장면 이해로 묶습니다.",
+      headline: "불확실성 속에서 신호를 설계합니다.",
+      summary: "레이더 반사, 센서 스트림, 노이즈 많은 환경을 현실에서 버틸 수 있는 판단으로 바꾸는 인지 시스템을 설계합니다.",
+      ctaWork: "작업 보기",
+      ctaContact: "대화 시작",
+      workKicker: "주요 작업",
+      workTitle: "신호, 시간, 신뢰도를 중심으로 만든 시스템.",
+      workIntro: "이 홈페이지가 보여줘야 할 작업은 명확합니다. 깨끗한 데모가 아니라 노이즈, 물리 제약, 실제 판단을 견디는 엔지니어링입니다.",
+      workCard1Title: "신호 처리 체계 설계",
+      workCard1Body: "전처리와 탐지 기준부터 트랙 수준의 동작까지, 측정값이 판단으로 이어지는 전체 경로를 다룹니다.",
+      workCard2Title: "센서 융합 구조",
+      workCard2Body: "시간 정렬, 신뢰도, 실패 모드가 숨겨지지 않고 인터페이스에 드러나는 구조를 선호합니다.",
+      workCard3Title: "인식 시스템 검증",
+      workCard3Body: "어떤 신호를 믿었고, 어떤 측정을 버렸고, 왜 트랙이 바뀌었는지 설명 가능한 시스템을 지향합니다.",
+      notesKicker: "기술 노트",
+      notesTitle: "확장할 가치가 있는 기술 노트.",
+      notesIntro: "짧고 기술적이며 판단이 담긴 글을 쌓기 위한 자리입니다.",
+      note1Title: "불확실성 속의 추적",
+      note1Body: "게이팅, 필터링, 신뢰도 처리가 인식 시스템을 믿을 만하게도, 취약하게도 만듭니다.",
+      note2Title: "센서들이 서로 다를 때",
+      note2Body: "융합은 평균을 내는 일이 아니라 불일치를 드러내고, 가중하고, 회복 가능하게 만드는 일입니다.",
+      contactKicker: "연락",
+      contactTitle: "기술적인 대화를 환영합니다.",
+      contactBody: "레이더 신호 처리, 센서 융합, 인지 시스템, 연구 지향 엔지니어링에 대해 편하게 연락해 주세요.",
+      githubLabel: "깃허브",
+      emailLabel: "이메일",
+      footerBuilt: "교체 가능한 미디어 구조의 개인 브랜드 시스템.",
+      footerUpdated: "업데이트"
+    });
+
     const root = document.documentElement;
     const themeToggle = document.querySelector(".theme-toggle");
     const languageToggle = document.querySelector(".language-toggle");
@@ -850,6 +897,7 @@
       languageToggle.dataset.langCurrent = lang;
       languageToggle.setAttribute("aria-pressed", String(lang === "ko"));
       document.documentElement.lang = lang;
+      document.title = dictionary.pageTitle || translations.en.pageTitle;
       languageCode.textContent = lang.toUpperCase();
       document.querySelectorAll("[data-i18n]").forEach((node) => {
         const key = node.dataset.i18n;
