@@ -222,6 +222,10 @@
     .language-orb {
       background: #f5f7ef;
       box-shadow: inset 0 0 0 2px rgba(12, 122, 77, .18);
+      display: grid;
+      place-items: center;
+      color: #0c7a4d;
+      font: 800 7px/1 var(--mono);
     }
 
     [data-theme="light"] .theme-orb,
@@ -234,20 +238,6 @@
       box-shadow: inset 0 0 0 2px rgba(12, 122, 77, .18);
     }
 
-    .single-toggle::before,
-    .single-toggle::after {
-      color: var(--muted);
-      font: 700 8px/1 var(--mono);
-    }
-
-    .language-toggle::before {
-      content: "EN";
-    }
-
-    .language-toggle::after {
-      content: "KO";
-    }
-
     main {
       display: grid;
       align-content: center;
@@ -255,11 +245,9 @@
       padding: 48px 0 64px;
     }
 
-    .hero {
+    .hero-stack {
       display: grid;
-      grid-template-columns: minmax(260px, .46fr) minmax(0, 1fr);
-      gap: clamp(28px, 5vw, 76px);
-      align-items: center;
+      gap: clamp(28px, 4vw, 46px);
     }
 
     .eyebrow {
@@ -314,10 +302,10 @@
     }
 
     .profile-panel {
-      --portrait-size: clamp(132px, 17vw, 190px);
+      --portrait-size: clamp(118px, 15vw, 176px);
       display: grid;
-      grid-template-columns: auto minmax(190px, 1fr);
-      gap: 18px;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: clamp(12px, 3vw, 22px);
       align-items: center;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -401,8 +389,8 @@
     .dossier-body,
     .profile-signals-body {
       display: grid;
-      gap: 18px;
-      padding: 18px;
+      gap: 12px;
+      padding: 14px;
       font-family: var(--mono);
     }
 
@@ -478,12 +466,19 @@
       .nav-links { gap: 9px; }
       .nav-controls { gap: 6px; }
       nav a { font-size: 11px; }
-      .hero { grid-template-columns: 1fr; align-items: start; }
+      .hero-stack { align-items: start; }
       main { align-content: start; padding-top: 32px; }
       .media-strip { grid-template-columns: 1fr; }
       h1 { font-size: clamp(38px, 11vw, 58px); }
       .summary { font-size: 18px; }
-      .profile-panel { --portrait-size: 156px; grid-template-columns: 1fr; justify-items: center; }
+      .profile-panel { --portrait-size: 116px; grid-template-columns: auto minmax(0, 1fr); padding: 12px; gap: 10px; }
+      .profile-signals-head { padding: 10px 11px; font-size: 10px; }
+      .profile-signals-body { padding: 11px; gap: 10px; }
+      .signal-card { gap: 8px; }
+      .signal-card strong { font-size: 12px; margin-bottom: 3px; }
+      .signal-card span { font-size: 11px; line-height: 1.35; }
+      .portrait-caption { width: auto; padding: 8px 10px; font-size: 10px; }
+      .portrait-caption span:last-child { display: none; }
     }
 
     @media (max-width: 560px) {
@@ -496,6 +491,7 @@
       .nav-links { gap: 8px; }
       .single-toggle { width: 38px; height: 22px; }
       .toggle-orb { width: 14px; height: 14px; }
+      .language-orb { font-size: 6px; }
       [data-theme="light"] .theme-orb,
       .single-toggle[data-lang-current="ko"] .language-orb { transform: translateX(16px); }
       .actions { display: grid; }
@@ -526,14 +522,14 @@
             <span class="toggle-orb theme-orb" aria-hidden="true"></span>
           </button>
           <button type="button" class="language-toggle single-toggle" aria-label="Toggle language" aria-pressed="false" data-lang-current="en">
-            <span class="toggle-orb language-orb" aria-hidden="true"></span>
+            <span class="toggle-orb language-orb" aria-hidden="true"><span class="language-code">EN</span></span>
           </button>
         </div>
       </nav>
     </header>
 
     <main>
-      <section class="hero" aria-label="Intro">
+      <section class="hero-stack" aria-label="Intro">
         <aside class="profile-panel hero-profile" aria-label="Profile and capability dossier">
           <figure class="profile-photo">
             <div class="portrait-frame">
@@ -553,11 +549,11 @@
             <div class="profile-signals-body">
               <div class="signal-card">
                 <span class="dot"></span>
-                <p><strong>Radar processing</strong><span>Detection, estimation, filtering, tracking, and interpretation under ambiguity.</span></p>
+                <p><strong>Radar processing</strong><span>Detection, filtering, tracking.</span></p>
               </div>
               <div class="signal-card">
                 <span class="dot"></span>
-                <p><strong>Sensor fusion</strong><span>Multi-modal reasoning across imperfect measurements, timing, and confidence.</span></p>
+                <p><strong>Sensor fusion</strong><span>Timing, confidence, decisions.</span></p>
               </div>
             </div>
           </div>
@@ -625,6 +621,7 @@
       languageToggle.dataset.langCurrent = nextLang;
       languageToggle.setAttribute("aria-pressed", String(nextLang === "ko"));
       document.documentElement.lang = nextLang;
+      languageToggle.querySelector(".language-code").textContent = nextLang.toUpperCase();
     });
 
     setTheme(storedTheme);

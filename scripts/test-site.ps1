@@ -52,6 +52,8 @@ $requirements = @(
   @{ Pattern = 'class="language-toggle single-toggle"'; Message = "Language must use one toggle control." },
   @{ Pattern = 'aria-label="Toggle language"'; Message = "Language toggle must be a single accessible control." },
   @{ Pattern = 'data-lang-current="en"'; Message = "Homepage must track current language state." },
+  @{ Pattern = 'class="language-code"'; Message = "Language toggle should show only the current language inside the orb." },
+  @{ Pattern = 'class="hero-stack"'; Message = "Hero content must stack profile above the main statement." },
   @{ Pattern = 'class="nav-links"'; Message = "Navigation links must be grouped separately from controls." },
   @{ Pattern = 'class="nav-controls"'; Message = "Theme and language controls must be grouped at the far right." },
   @{ Pattern = 'class="profile-panel hero-profile"'; Message = "Profile panel must be placed before the hero copy." },
@@ -90,6 +92,22 @@ if ($html -match 'data-theme-option="dark"' -or $html -match 'data-theme-option=
 
 if ($html -match 'data-lang-option="en"' -or $html -match 'data-lang-option="ko"') {
   throw "Language control should be one toggle, not two language buttons."
+}
+
+if ($html -match 'content:\s*"EN"' -or $html -match 'content:\s*"KO"') {
+  throw "Language toggle should not show both EN and KO labels."
+}
+
+if ($html -match 'Detection, estimation, filtering, tracking, and interpretation under ambiguity') {
+  throw "Radar processing copy is too long for the mobile side-by-side profile panel."
+}
+
+if ($html -match 'Multi-modal reasoning across imperfect measurements, timing, and confidence') {
+  throw "Sensor fusion copy is too long for the mobile side-by-side profile panel."
+}
+
+if ($html -match '@media \(max-width: 880px\)[\s\S]*?\.profile-panel\s*\{[^}]*grid-template-columns:\s*1fr') {
+  throw "Profile panel should remain side-by-side on mobile."
 }
 
 if ($html -match '\.brand-text\s*\{\s*display:\s*none') {
