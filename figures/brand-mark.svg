@@ -1,37 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 1024 1024" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Insight sharing favicon, Emerald">
-  <title>Insight Sharing Favicon - Emerald</title>
-  <desc>Bold left-facing human head silhouette with an enlarged three-node share icon inside. Transparent background. 512 by 512 SVG.</desc>
-  <path d="M 815 100
-C 930 145 975 255 950 370
-C 930 455 875 495 855 585
-C 845 630 850 770 850 940
-L 420 940
-L 420 840
-C 420 815 405 800 380 800
-L 245 800
-C 185 800 150 765 150 710
-L 150 610
-C 150 590 138 578 118 578
-L 92 578
-C 60 578 36 557 32 527
-C 29 502 39 482 57 464
-L 145 373
-C 165 353 175 328 175 300
-L 175 232
-C 175 175 218 132 285 112
-C 430 67 675 45 815 100 Z" fill="#0F8A5F"/>
-  <g fill="none" stroke="#EEFFF7" stroke-width="82" stroke-linecap="round" stroke-linejoin="round">
-    <line x1="430" y1="390" x2="750" y2="205"/>
-    <line x1="430" y1="390" x2="750" y2="585"/>
-  </g>
-  <g fill="#EEFFF7">
-    <circle cx="430" cy="390" r="92"/>
-    <circle cx="750" cy="205" r="92"/>
-    <circle cx="750" cy="585" r="92"/>
-  </g>
-  <g fill="#0F8A5F">
-    <circle cx="430" cy="390" r="30"/>
-    <circle cx="750" cy="205" r="30"/>
-    <circle cx="750" cy="585" r="30"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Green lightbulb share favicon">
+  <title>Green Lightbulb Share Favicon</title>
+  <desc>A bold lightbulb favicon with a transparent curved share arrow cut out from the center. Transparent background.</desc>
+  <defs>
+    <mask id="cutout-green">
+      <rect width="512" height="512" fill="black"/>
+      <path d="M256 24
+               C177 24 112 87 112 165
+               C112 210 130 244 156 280
+               C181 313 192 345 194 383
+               C195 404 208 417 228 417
+               L284 417
+               C304 417 317 404 318 383
+               C320 345 331 313 356 280
+               C382 244 400 210 400 165
+               C400 87 335 24 256 24 Z
+               M192 424
+               L320 424
+               C327 424 332 429 332 436
+               L332 467
+               C332 491 313 504 288 504
+               L224 504
+               C199 504 180 491 180 467
+               L180 436
+               C180 429 185 424 192 424 Z" fill="white"/>
+      <path d="M190 334
+               C186 282 213 242 261 217
+               C293 200 325 198 371 198
+               L371 156
+               C371 150 378 147 383 151
+               L469 226
+               C475 231 475 241 469 246
+               L383 321
+               C378 325 371 322 371 316
+               L371 274
+               C333 274 304 281 278 296
+               C248 313 230 338 219 374
+               C217 380 211 382 206 380
+               C197 377 191 369 190 358
+               Z" fill="black"/>
+    </mask>
+  </defs>
+  <path d="M256 24
+           C177 24 112 87 112 165
+           C112 210 130 244 156 280
+           C181 313 192 345 194 383
+           C195 404 208 417 228 417
+           L284 417
+           C304 417 317 404 318 383
+           C320 345 331 313 356 280
+           C382 244 400 210 400 165
+           C400 87 335 24 256 24 Z
+           M192 424
+           L320 424
+           C327 424 332 429 332 436
+           L332 467
+           C332 491 313 504 288 504
+           L224 504
+           C199 504 180 491 180 467
+           L180 436
+           C180 429 185 424 192 424 Z"
+        fill="#119E67" mask="url(#cutout-green)"/>
 </svg>
