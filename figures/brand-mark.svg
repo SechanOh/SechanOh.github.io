@@ -1,63 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Green lightbulb share favicon">
-  <title>Green Lightbulb Share Favicon</title>
-  <desc>A bold lightbulb favicon with a transparent curved share arrow cut out from the center. Transparent background.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Yellow lightbulb share favicon">
+  <title>Yellow lightbulb share favicon</title>
+  <desc>A bold, extra-wide lightbulb favicon with a centered transparent share arrow cut out of the bulb. Transparent background.</desc>
   <defs>
-    <mask id="cutout-green">
+    <mask id="cutout-yellow-fat">
       <rect width="512" height="512" fill="black"/>
-      <path d="M256 24
-               C177 24 112 87 112 165
-               C112 210 130 244 156 280
-               C181 313 192 345 194 383
-               C195 404 208 417 228 417
-               L284 417
-               C304 417 317 404 318 383
-               C320 345 331 313 356 280
-               C382 244 400 210 400 165
-               C400 87 335 24 256 24 Z
-               M192 424
-               L320 424
-               C327 424 332 429 332 436
-               L332 467
-               C332 491 313 504 288 504
-               L224 504
-               C199 504 180 491 180 467
-               L180 436
-               C180 429 185 424 192 424 Z" fill="white"/>
-      <path d="M190 334
-               C186 282 213 242 261 217
-               C293 200 325 198 371 198
-               L371 156
-               C371 150 378 147 383 151
-               L469 226
-               C475 231 475 241 469 246
-               L383 321
-               C378 325 371 322 371 316
-               L371 274
-               C333 274 304 281 278 296
-               C248 313 230 338 219 374
-               C217 380 211 382 206 380
-               C197 377 191 369 190 358
-               Z" fill="black"/>
+      <path d="M256 6 C140 6 38 102 38 218 C38 300 70 350 110 390 C130 410 145 434 145 458 C145 479 159 494 178 494 L334 494 C353 494 367 479 367 458 C367 434 382 410 402 390 C442 350 474 300 474 218 C474 102 372 6 256 6 Z M160 458 L352 458 C357 458 361 462 361 467 L361 486 C361 500 349 512 335 512 L177 512 C163 512 151 500 151 486 L151 467 C151 462 155 458 160 458 Z" fill="white" fill-rule="evenodd"/>
+      <path d="M138 343 C134 275 180 224 250 194 C286 178 318 172 357 171 L357 119 C357 112 365 109 370 114 L470 206 C476 212 476 220 470 226 L370 318 C365 323 357 320 357 313 L357 265 C326 265 298 271 274 284 C236 304 210 335 197 379 C195 387 188 391 181 389 C155 381 140 365 138 343 Z" fill="black"/>
     </mask>
   </defs>
-  <path d="M256 24
-           C177 24 112 87 112 165
-           C112 210 130 244 156 280
-           C181 313 192 345 194 383
-           C195 404 208 417 228 417
-           L284 417
-           C304 417 317 404 318 383
-           C320 345 331 313 356 280
-           C382 244 400 210 400 165
-           C400 87 335 24 256 24 Z
-           M192 424
-           L320 424
-           C327 424 332 429 332 436
-           L332 467
-           C332 491 313 504 288 504
-           L224 504
-           C199 504 180 491 180 467
-           L180 436
-           C180 429 185 424 192 424 Z"
-        fill="#119E67" mask="url(#cutout-green)"/>
+  <rect width="512" height="512" fill="#E2B400" mask="url(#cutout-yellow-fat)"/>
 </svg>
