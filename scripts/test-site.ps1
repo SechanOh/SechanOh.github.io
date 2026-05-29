@@ -64,6 +64,7 @@ $requirements = @(
   @{ Pattern = 'Signal chain design'; Message = "Work section should include substantial radar/sensor content." },
   @{ Pattern = 'Tracking under uncertainty'; Message = "Notes section should include a technical note entry." },
   @{ Pattern = 'Open to technical conversations'; Message = "Contact section should include a clear contact prompt." },
+  @{ Pattern = 'class="contact-panel"'; Message = "Contact section should keep its layout without boxed module styling." },
   @{ Pattern = 'ko:\s*\{'; Message = "Korean content block must be present for language switching." },
   @{ Pattern = 'class="nav-links"'; Message = "Navigation links must be grouped separately from controls." },
   @{ Pattern = 'class="nav-controls"'; Message = "Theme and language controls must be grouped at the far right." },
@@ -141,6 +142,10 @@ if ($html -match '@media \(max-width: 560px\)[\s\S]*?\.profile-panel\s*\{[^}]*gr
 
 if ($html -match 'class="profile-photo module-card"' -or $html -match 'class="profile-signals module-card"') {
   throw "Profile identity and signal copy should not be boxed as module cards."
+}
+
+if ($html -match 'class="contact-panel module-card"') {
+  throw "Contact section should not be boxed as a module card."
 }
 
 if ($html -notmatch '\.profile-signals-body\s*\{[^}]*grid-area:\s*signals') {
