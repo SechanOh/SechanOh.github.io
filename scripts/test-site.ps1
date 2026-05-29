@@ -71,6 +71,10 @@ $requirements = @(
   @{ Pattern = 'class="profile-photo"'; Message = "Profile photo must exist in the profile panel." },
   @{ Pattern = 'class="profile-meta"'; Message = "Profile name and caption should live in the right profile module." },
   @{ Pattern = 'class="profile-signals-body"'; Message = "Signal capability text must sit below the profile identity row on mobile." },
+  @{ Pattern = 'grid-template-areas:\s*"photo meta"\s*"photo signals"'; Message = "Desktop profile should use a composed photo/name/signals layout." },
+  @{ Pattern = 'grid-area:\s*photo'; Message = "Profile photo should be explicitly placed in the desktop composition." },
+  @{ Pattern = 'grid-area:\s*meta'; Message = "Profile identity should be explicitly placed in the desktop composition." },
+  @{ Pattern = 'grid-area:\s*signals'; Message = "Profile signal text should be explicitly placed in the desktop composition." },
   @{ Pattern = 'class="hero-copy"'; Message = "Hero copy must be explicitly separated after the profile block." },
   @{ Pattern = '\.hero-copy\s*\{[^}]*width:\s*100%'; Message = "Hero copy should use the same available width as the module sections." },
   @{ Pattern = '\.hero-copy\s*\{[^}]*max-width:\s*none'; Message = "Hero copy should not feel narrower than other modules." },
@@ -139,12 +143,16 @@ if ($html -match 'class="profile-photo module-card"' -or $html -match 'class="pr
   throw "Profile identity and signal copy should not be boxed as module cards."
 }
 
-if ($html -notmatch '\.profile-signals-body\s*\{[^}]*grid-column:\s*2') {
+if ($html -notmatch '\.profile-signals-body\s*\{[^}]*grid-area:\s*signals') {
   throw "Desktop profile signal copy should align to the right of the photo."
 }
 
 if ($html -notmatch '@media \(max-width: 560px\)[\s\S]*?\.profile-signals-body\s*\{[^}]*grid-column:\s*1\s*/\s*-1') {
   throw "Mobile profile signal copy should sit below the photo and name row."
+}
+
+if ($html -notmatch '@media \(max-width: 560px\)[\s\S]*?\.profile-panel\s*\{[^}]*column-gap:\s*18px[^}]*row-gap:\s*22px') {
+  throw "Mobile profile needs more space between photo/name and the signal copy."
 }
 
 if ($html -match 'Multi-modal reasoning across imperfect measurements, timing, and confidence') {
