@@ -46,7 +46,7 @@ $requirements = @(
   @{ Pattern = 'figures/SechanOh_picture\.jpg'; Message = "index.html must reference the profile photo." },
   @{ Pattern = 'figures/brand-mark\.svg'; Message = "index.html must reference the editable brand mark asset." },
   @{ Pattern = '<link rel="icon" type="image/svg\+xml" href="figures/brand-mark\.svg">'; Message = "Brand mark must be used as the browser tab icon." },
-  @{ Pattern = '<title>Sechan Oh - Signal Systems</title>'; Message = "Browser tab title should be concise and branded." },
+  @{ Pattern = '<title>Sechan Oh Homepage</title>'; Message = "Browser tab title should be concise and homepage-oriented." },
   @{ Pattern = 'content/site-config\.js'; Message = "index.html must load the editable content config." },
   @{ Pattern = 'class="theme-toggle single-toggle"'; Message = "Theme must use one toggle control." },
   @{ Pattern = 'aria-label="Toggle color theme"'; Message = "Theme toggle must be a single accessible control." },
@@ -68,12 +68,14 @@ $requirements = @(
   @{ Pattern = 'class="nav-links"'; Message = "Navigation links must be grouped separately from controls." },
   @{ Pattern = 'class="nav-controls"'; Message = "Theme and language controls must be grouped at the far right." },
   @{ Pattern = 'class="profile-panel hero-profile"'; Message = "Profile panel must be placed before the hero copy." },
-  @{ Pattern = 'class="profile-photo module-card"'; Message = "Profile photo must use the shared module card design." },
-  @{ Pattern = 'class="profile-signals module-card"'; Message = "Signal capabilities must use the shared module card design." },
+  @{ Pattern = 'class="profile-photo"'; Message = "Profile photo must exist in the profile panel." },
   @{ Pattern = 'class="profile-meta"'; Message = "Profile name and caption should live in the right profile module." },
+  @{ Pattern = 'class="profile-signals-body"'; Message = "Signal capability text must sit below the profile identity row on mobile." },
   @{ Pattern = 'class="hero-copy"'; Message = "Hero copy must be explicitly separated after the profile block." },
   @{ Pattern = '\.hero-copy\s*\{[^}]*width:\s*100%'; Message = "Hero copy should use the same available width as the module sections." },
   @{ Pattern = '\.hero-copy\s*\{[^}]*max-width:\s*none'; Message = "Hero copy should not feel narrower than other modules." },
+  @{ Pattern = '\.section-title-group\s*\{[^}]*display:\s*grid'; Message = "Section kicker and title spacing should use one shared title group." },
+  @{ Pattern = 'class="section-title-group"'; Message = "Work and Notes headings should use the shared title spacing group." },
   @{ Pattern = '\.module-card\s*\{[^}]*border:\s*1px solid var\(--line\)'; Message = "Homepage modules must share one bordered card design." },
   @{ Pattern = '\.module-card\s*\{[^}]*border-radius:\s*8px'; Message = "Homepage modules must share the same card radius." },
   @{ Pattern = '\.module-card\s*\{[^}]*background:\s*var\(--surface\)'; Message = "Homepage modules must share the same surface treatment." },
@@ -133,6 +135,18 @@ if ($html -match '@media \(max-width: 560px\)[\s\S]*?\.profile-panel\s*\{[^}]*gr
   throw "Profile panel should remain left-right on mobile."
 }
 
+if ($html -match 'class="profile-photo module-card"' -or $html -match 'class="profile-signals module-card"') {
+  throw "Profile identity and signal copy should not be boxed as module cards."
+}
+
+if ($html -notmatch '\.profile-signals-body\s*\{[^}]*grid-column:\s*2') {
+  throw "Desktop profile signal copy should align to the right of the photo."
+}
+
+if ($html -notmatch '@media \(max-width: 560px\)[\s\S]*?\.profile-signals-body\s*\{[^}]*grid-column:\s*1\s*/\s*-1') {
+  throw "Mobile profile signal copy should sit below the photo and name row."
+}
+
 if ($html -match 'Multi-modal reasoning across imperfect measurements, timing, and confidence') {
   throw "Sensor fusion copy is too long for the mobile side-by-side profile panel."
 }
@@ -153,7 +167,7 @@ if ($html -match 'profile-signals-head') {
   throw "Profile signal panel should not repeat the name and perception systems label."
 }
 
-if ($html -match '<figure class="profile-photo module-card">[\s\S]*?<figcaption') {
+if ($html -match '<figure class="profile-photo">[\s\S]*?<figcaption') {
   throw "Profile caption should be positioned in the right module, not below the photo."
 }
 

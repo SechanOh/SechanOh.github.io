@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Sechan Oh - Radar Signal Processing and Sensor Fusion Engineer.">
-  <title>Sechan Oh - Signal Systems</title>
+  <title>Sechan Oh Homepage</title>
   <link rel="icon" type="image/svg+xml" href="figures/brand-mark.svg">
   <style>
     :root {
@@ -272,14 +272,20 @@
       margin-bottom: 18px;
     }
 
+    .section-title-group {
+      display: grid;
+      gap: 8px;
+    }
+
     .section-kicker {
-      margin: 0 0 8px;
+      margin: 0;
       color: var(--signal);
       font: 700 12px/1.3 var(--mono);
       text-transform: uppercase;
     }
 
-    .section-head h2 {
+    .section-head h2,
+    .contact-panel h2 {
       margin: 0;
       font: 700 clamp(25px, 4vw, 42px)/1.05 var(--serif);
     }
@@ -361,6 +367,11 @@
       grid-template-columns: 1fr auto;
       gap: 18px;
       align-items: center;
+    }
+
+    .contact-panel > div:first-child {
+      display: grid;
+      gap: 14px;
     }
 
     .contact-links {
@@ -467,11 +478,10 @@
     .profile-meta {
       display: grid;
       gap: 4px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--line);
       color: var(--muted);
       font: 700 12px/1.35 var(--mono);
       text-transform: uppercase;
+      align-content: center;
     }
 
     .profile-meta span:first-child {
@@ -484,6 +494,7 @@
       display: grid;
       gap: 12px;
       font-family: var(--mono);
+      grid-column: 2;
     }
 
     .signal-card {
@@ -543,10 +554,9 @@
       .contact-panel { grid-template-columns: 1fr; display: grid; align-items: start; }
       h1 { font-size: clamp(38px, 11vw, 58px); }
       .summary { font-size: 18px; }
-      .profile-panel { --portrait-size: 116px; grid-template-columns: minmax(0, .78fr) minmax(0, 1fr); gap: 10px; }
+      .profile-panel { --portrait-size: 116px; grid-template-columns: auto minmax(0, 1fr); gap: 10px; }
       .module-card { padding: 14px; }
-      .profile-signals { gap: 12px; }
-      .profile-meta { padding-bottom: 10px; font-size: 10px; }
+      .profile-meta { font-size: 10px; }
       .profile-meta span:first-child { font-size: 18px; }
       .profile-signals-body { gap: 10px; }
       .signal-card { gap: 8px; }
@@ -566,8 +576,9 @@
       .toggle-orb { width: 14px; height: 14px; }
       .language-code { font-size: 9px; }
       [data-theme="light"] .theme-orb { transform: translateX(16px); }
-      .profile-panel { --portrait-size: 104px; grid-template-columns: minmax(0, .74fr) minmax(0, 1fr); }
+      .profile-panel { --portrait-size: 104px; grid-template-columns: auto minmax(0, 1fr); }
       .profile-photo { min-height: 100%; }
+      .profile-signals-body { grid-column: 1 / -1; }
       .actions { display: grid; }
       .button { justify-content: center; }
     }
@@ -605,26 +616,25 @@
     <main>
       <section class="hero-stack" aria-label="Intro">
         <aside class="profile-panel hero-profile" aria-label="Profile and capability dossier">
-          <figure class="profile-photo module-card">
+          <figure class="profile-photo">
             <div class="portrait-frame">
               <img src="figures/SechanOh_picture.jpg" alt="Portrait of Sechan Oh">
             </div>
           </figure>
 
-          <div class="profile-signals module-card">
-            <div class="profile-meta">
-              <span data-i18n="brandName">Sechan Oh</span>
-              <span data-i18n="profileCaption">perception systems</span>
+          <div class="profile-meta">
+            <span data-i18n="brandName">Sechan Oh</span>
+            <span data-i18n="profileCaption">perception systems</span>
+          </div>
+
+          <div class="profile-signals-body">
+            <div class="signal-card">
+              <span class="dot"></span>
+              <p><strong data-i18n="radarTitle">Radar processing</strong><span data-i18n="radarBody">I turn raw radar returns into stable detections, tracks, and interpretable motion cues.</span></p>
             </div>
-            <div class="profile-signals-body">
-              <div class="signal-card">
-                <span class="dot"></span>
-                <p><strong data-i18n="radarTitle">Radar processing</strong><span data-i18n="radarBody">I turn raw radar returns into stable detections, tracks, and interpretable motion cues.</span></p>
-              </div>
-              <div class="signal-card">
-                <span class="dot"></span>
-                <p><strong data-i18n="fusionTitle">Sensor fusion</strong><span data-i18n="fusionBody">I align imperfect sensors into one confidence-aware view of the scene.</span></p>
-              </div>
+            <div class="signal-card">
+              <span class="dot"></span>
+              <p><strong data-i18n="fusionTitle">Sensor fusion</strong><span data-i18n="fusionBody">I align imperfect sensors into one confidence-aware view of the scene.</span></p>
             </div>
           </div>
         </aside>
@@ -645,7 +655,7 @@
       <section class="content-sections" aria-label="Homepage sections">
         <section class="section-band" id="work">
           <div class="section-head">
-            <div>
+            <div class="section-title-group">
               <p class="section-kicker" data-i18n="workKicker">Selected work</p>
               <h2 data-i18n="workTitle">Systems built around signal, timing, and confidence.</h2>
             </div>
@@ -672,7 +682,7 @@
 
         <section class="section-band" id="writing">
           <div class="section-head">
-            <div>
+            <div class="section-title-group">
               <p class="section-kicker" data-i18n="notesKicker">Notes</p>
               <h2 data-i18n="notesTitle">Technical notes worth expanding.</h2>
             </div>
@@ -693,8 +703,10 @@
         <section class="section-band" id="contact">
           <div class="contact-panel module-card">
             <div>
-              <p class="section-kicker" data-i18n="contactKicker">Contact</p>
-              <h2 data-i18n="contactTitle">Open to technical conversations.</h2>
+              <div class="section-title-group">
+                <p class="section-kicker" data-i18n="contactKicker">Contact</p>
+                <h2 data-i18n="contactTitle">Open to technical conversations.</h2>
+              </div>
               <p data-i18n="contactBody">Reach out for radar signal processing, sensor fusion, perception systems, or research-minded engineering conversations.</p>
             </div>
             <div class="contact-links">
