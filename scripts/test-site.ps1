@@ -5,6 +5,9 @@ $indexPath = Join-Path $root "index.html"
 $photoPath = Join-Path $root "figures\SechanOh_picture.jpg"
 $brandMarkPath = Join-Path $root "figures\brand-mark.svg"
 $contentPath = Join-Path $root "content\site-config.js"
+$issueTemplatePath = Join-Path $root ".github\ISSUE_TEMPLATE\homepage-request.yml"
+$issueConfigPath = Join-Path $root ".github\ISSUE_TEMPLATE\config.yml"
+$issueWorkflowPath = Join-Path $root "docs\github-issues-workflow.md"
 
 if (-not (Test-Path $indexPath)) {
   throw "index.html is required for the GitHub Pages root."
@@ -22,8 +25,22 @@ if (-not (Test-Path $contentPath)) {
   throw "Editable content config content\site-config.js is missing."
 }
 
+if (-not (Test-Path $issueTemplatePath)) {
+  throw "GitHub Issues homepage request template is missing."
+}
+
+if (-not (Test-Path $issueConfigPath)) {
+  throw "GitHub Issues template config is missing."
+}
+
+if (-not (Test-Path $issueWorkflowPath)) {
+  throw "GitHub Issues workflow documentation is missing."
+}
+
 $html = Get-Content -Raw -Path $indexPath
 $content = Get-Content -Raw -Path $contentPath
+$issueTemplate = Get-Content -Raw -Path $issueTemplatePath
+$issueWorkflow = Get-Content -Raw -Path $issueWorkflowPath
 
 $requirements = @(
   @{ Pattern = 'figures/SechanOh_picture\.jpg'; Message = "index.html must reference the profile photo." },
@@ -31,6 +48,16 @@ $requirements = @(
   @{ Pattern = 'content/site-config\.js'; Message = "index.html must load the editable content config." },
   @{ Pattern = 'data-theme-option="dark"'; Message = "index.html must include the dark theme option." },
   @{ Pattern = 'data-theme-option="light"'; Message = "index.html must include the light theme option." },
+  @{ Pattern = 'aria-label="Use dark theme"'; Message = "Dark theme control must be icon-only with an accessible label." },
+  @{ Pattern = 'aria-label="Use light theme"'; Message = "Light theme control must be icon-only with an accessible label." },
+  @{ Pattern = 'class="control-dot dark-dot"'; Message = "Dark theme control must use a circular visual button." },
+  @{ Pattern = 'class="control-dot light-dot"'; Message = "Light theme control must use a circular visual button." },
+  @{ Pattern = 'data-lang-option="en"'; Message = "Homepage must include an English language option." },
+  @{ Pattern = 'data-lang-option="ko"'; Message = "Homepage must include a Korean language option." },
+  @{ Pattern = 'class="nav-links"'; Message = "Navigation links must be grouped separately from controls." },
+  @{ Pattern = 'class="nav-controls"'; Message = "Theme and language controls must be grouped at the far right." },
+  @{ Pattern = 'class="profile-stack hero-profile"'; Message = "Profile block must be placed before the hero copy." },
+  @{ Pattern = 'class="hero-copy"'; Message = "Hero copy must be explicitly separated after the profile block." },
   @{ Pattern = 'prefers-color-scheme: dark'; Message = "Default theme must follow the system color scheme." },
   @{ Pattern = 'class="brand-link" href="/"'; Message = "Brand mark must link back to the homepage." },
   @{ Pattern = 'class="brand-glyph"'; Message = "Brand mark must include a designed glyph." },
@@ -57,6 +84,10 @@ if ($html -match 'data-theme-option="system"') {
   throw "Theme toggle should expose only dark and light controls."
 }
 
+if ($html -match '>Dark</button>' -or $html -match '>Light</button>') {
+  throw "Theme controls should not expose visible Dark/Light text."
+}
+
 if ($html -match '\.portrait-frame::after') {
   throw "Profile photo must not use a gradient overlay."
 }
@@ -68,6 +99,18 @@ if ($html -match 'filter:\s*saturate') {
 foreach ($pattern in @('brandName', 'brandSubtitle', 'profileImage', 'youtubeId', 'lastUpdatedLabel')) {
   if ($content -notmatch $pattern) {
     throw "content\site-config.js must expose $pattern for easy editing."
+  }
+}
+
+foreach ($pattern in @('Homepage change request', 'request_type', 'Mobile context', 'Acceptance criteria', 'codex-homepage')) {
+  if ($issueTemplate -notmatch $pattern) {
+    throw "homepage-request.yml must include $pattern."
+  }
+}
+
+foreach ($pattern in @('GitHub Issues', 'Codex', 'mobile', 'acceptance criteria')) {
+  if ($issueWorkflow -notmatch $pattern) {
+    throw "GitHub Issues workflow documentation must mention $pattern."
   }
 }
 
