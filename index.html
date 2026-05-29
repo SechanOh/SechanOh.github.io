@@ -143,38 +143,9 @@
     .brand-glyph {
       width: 32px;
       height: 32px;
-      border: 1px solid var(--line);
       border-radius: 50%;
-      background:
-        linear-gradient(135deg, var(--signal-soft), transparent),
-        var(--surface);
-      color: var(--signal);
-      display: inline-grid;
-      place-items: center;
       box-shadow: 0 12px 26px var(--shadow);
-      position: relative;
-    }
-
-    .brand-glyph::before,
-    .brand-glyph::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid currentColor;
-      opacity: .5;
-    }
-
-    .brand-glyph::before {
-      width: 18px;
-      height: 18px;
-    }
-
-    .brand-glyph::after {
-      width: 5px;
-      height: 5px;
-      background: currentColor;
-      opacity: 1;
-      box-shadow: 9px -5px 0 -2px currentColor;
+      display: block;
     }
 
     .brand-text {
@@ -322,7 +293,7 @@
       height: var(--portrait-size);
       border: 1px solid var(--line);
       border-radius: 50%;
-      background: var(--surface-strong);
+      background: #fff;
       overflow: hidden;
       box-shadow: 0 24px 70px var(--shadow);
     }
@@ -331,8 +302,8 @@
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: cover;
-      filter: saturate(.82) contrast(1.08);
+      object-fit: contain;
+      object-position: center top;
     }
 
     .portrait-caption {
@@ -463,10 +434,10 @@
   <div class="shell">
     <header>
       <a class="brand-link" href="/" aria-label="Go to Sechan Oh homepage">
-        <span class="brand-glyph" aria-hidden="true"></span>
+        <img class="brand-glyph" src="figures/brand-mark.svg" alt="" aria-hidden="true">
         <span class="brand-text">
-          <span>Sechan Oh</span>
-          <span>signal systems</span>
+          <span data-content="brandName">Sechan Oh</span>
+          <span data-content="brandSubtitle">signal systems</span>
         </span>
       </a>
       <nav aria-label="Primary navigation">
@@ -533,22 +504,22 @@
 
     <footer>
       <span>Built as a replaceable-media personal brand system.</span>
-      <span>Last updated <time datetime="2026-05-29">May 29, 2026</time></span>
+      <span>Last updated <time datetime="2026-05-29" data-content="lastUpdatedLabel">May 29, 2026</time></span>
     </footer>
   </div>
 
+  <script src="content/site-config.js"></script>
   <script>
-    const mediaConfig = {
-      youtubeId: "REPLACE_WITH_YOUTUBE_ID",
-      profileImage: "figures/SechanOh_picture.jpg",
-      workVisual: ""
-    };
+    const siteContent = window.siteContent || {};
+    const mediaConfig = siteContent;
 
     const root = document.documentElement;
     const buttons = [...document.querySelectorAll("[data-theme-option]")];
     const storedTheme = localStorage.getItem("theme-preference") || "";
     const heroMedia = document.querySelector("#hero-media");
     const profileImage = document.querySelector(".portrait-frame img");
+    const brandMark = document.querySelector(".brand-glyph");
+    const updatedTime = document.querySelector("time[data-content='lastUpdatedLabel']");
 
     function setTheme(theme) {
       if (!theme) {
@@ -570,8 +541,23 @@
 
     setTheme(storedTheme);
 
+    document.querySelectorAll("[data-content]").forEach((node) => {
+      const key = node.dataset.content;
+      if (siteContent[key]) {
+        node.textContent = siteContent[key];
+      }
+    });
+
     if (mediaConfig.profileImage) {
       profileImage.src = mediaConfig.profileImage;
+    }
+
+    if (mediaConfig.brandMark) {
+      brandMark.src = mediaConfig.brandMark;
+    }
+
+    if (siteContent.lastUpdatedDate) {
+      updatedTime.dateTime = siteContent.lastUpdatedDate;
     }
 
     if (mediaConfig.youtubeId && mediaConfig.youtubeId !== "REPLACE_WITH_YOUTUBE_ID") {
