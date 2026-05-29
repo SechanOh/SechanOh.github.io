@@ -189,6 +189,10 @@ if ($html -notmatch '\.profile-signals-body\s*\{[^}]*grid-area:\s*signals') {
   throw "Desktop profile signal copy should align to the right of the photo."
 }
 
+if ($html -match '\.profile-signals-body\s*\{[^}]*border-top') {
+  throw "Profile identity and capability copy should not be separated by an internal line."
+}
+
 if ($html -notmatch '@media \(max-width: 560px\)[\s\S]*?\.profile-signals-body\s*\{[^}]*grid-column:\s*1\s*/\s*-1') {
   throw "Mobile profile signal copy should sit below the photo and name row."
 }
