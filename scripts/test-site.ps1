@@ -45,6 +45,8 @@ $issueWorkflow = Get-Content -Raw -Path $issueWorkflowPath
 $requirements = @(
   @{ Pattern = 'figures/SechanOh_picture\.jpg'; Message = "index.html must reference the profile photo." },
   @{ Pattern = 'figures/brand-mark\.svg'; Message = "index.html must reference the editable brand mark asset." },
+  @{ Pattern = '<link rel="icon" type="image/svg\+xml" href="figures/brand-mark\.svg">'; Message = "Brand mark must be used as the browser tab icon." },
+  @{ Pattern = '<title>Sechan Oh - Signal Systems</title>'; Message = "Browser tab title should be concise and branded." },
   @{ Pattern = 'content/site-config\.js'; Message = "index.html must load the editable content config." },
   @{ Pattern = 'class="theme-toggle single-toggle"'; Message = "Theme must use one toggle control." },
   @{ Pattern = 'aria-label="Toggle color theme"'; Message = "Theme toggle must be a single accessible control." },
@@ -70,6 +72,8 @@ $requirements = @(
   @{ Pattern = 'class="profile-signals module-card"'; Message = "Signal capabilities must use the shared module card design." },
   @{ Pattern = 'class="profile-meta"'; Message = "Profile name and caption should live in the right profile module." },
   @{ Pattern = 'class="hero-copy"'; Message = "Hero copy must be explicitly separated after the profile block." },
+  @{ Pattern = '\.hero-copy\s*\{[^}]*width:\s*100%'; Message = "Hero copy should use the same available width as the module sections." },
+  @{ Pattern = '\.hero-copy\s*\{[^}]*max-width:\s*none'; Message = "Hero copy should not feel narrower than other modules." },
   @{ Pattern = '\.module-card\s*\{[^}]*border:\s*1px solid var\(--line\)'; Message = "Homepage modules must share one bordered card design." },
   @{ Pattern = '\.module-card\s*\{[^}]*border-radius:\s*8px'; Message = "Homepage modules must share the same card radius." },
   @{ Pattern = '\.module-card\s*\{[^}]*background:\s*var\(--surface\)'; Message = "Homepage modules must share the same surface treatment." },
@@ -117,8 +121,16 @@ if ($html -match 'mediaConfig\.youtubeId<br>replace YouTube ID later') {
   throw "Placeholder media slots should be replaced by real homepage sections."
 }
 
+if ($html -match 'max-width:\s*820px' -or $html -match 'max-width:\s*730px') {
+  throw "Hero headline and summary should not keep narrow standalone max-widths."
+}
+
 if ($html -match 'Detection, estimation, filtering, tracking, and interpretation under ambiguity') {
   throw "Radar processing copy is too long for the mobile side-by-side profile panel."
+}
+
+if ($html -match '@media \(max-width: 560px\)[\s\S]*?\.profile-panel\s*\{[^}]*grid-template-columns:\s*1fr') {
+  throw "Profile panel should remain left-right on mobile."
 }
 
 if ($html -match 'Multi-modal reasoning across imperfect measurements, timing, and confidence') {

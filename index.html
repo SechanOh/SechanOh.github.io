@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Sechan Oh - Radar Signal Processing and Sensor Fusion Engineer.">
-  <title>Sechan Oh - Radar Signal Processing & Sensor Fusion Engineer</title>
+  <title>Sechan Oh - Signal Systems</title>
+  <link rel="icon" type="image/svg+xml" href="figures/brand-mark.svg">
   <style>
     :root {
       color-scheme: light dark;
@@ -375,9 +376,13 @@
       text-transform: uppercase;
     }
 
+    .hero-copy {
+      width: 100%;
+      max-width: none;
+    }
+
     h1 {
       margin: 0;
-      max-width: 820px;
       font-family: var(--serif);
       font-size: clamp(38px, 5.6vw, 72px);
       line-height: 1;
@@ -385,7 +390,6 @@
     }
 
     .summary {
-      max-width: 730px;
       margin: 24px 0 0;
       color: var(--muted);
       font-size: clamp(18px, 2.1vw, 24px);
@@ -562,8 +566,8 @@
       .toggle-orb { width: 14px; height: 14px; }
       .language-code { font-size: 9px; }
       [data-theme="light"] .theme-orb { transform: translateX(16px); }
-      .profile-panel { grid-template-columns: 1fr; }
-      .profile-photo { min-height: 176px; }
+      .profile-panel { --portrait-size: 104px; grid-template-columns: minmax(0, .74fr) minmax(0, 1fr); }
+      .profile-photo { min-height: 100%; }
       .actions { display: grid; }
       .button { justify-content: center; }
     }
