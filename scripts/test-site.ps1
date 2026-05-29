@@ -45,7 +45,7 @@ $issueWorkflow = Get-Content -Raw -Path $issueWorkflowPath
 $requirements = @(
   @{ Pattern = 'figures/SechanOh_picture\.jpg'; Message = "index.html must reference the profile photo." },
   @{ Pattern = 'figures/brand-mark\.svg'; Message = "index.html must reference the editable brand mark asset." },
-  @{ Pattern = '<link rel="icon" type="image/svg\+xml" href="figures/brand-mark\.svg">'; Message = "Brand mark must be used as the browser tab icon." },
+  @{ Pattern = '<link rel="icon" type="image/svg\+xml" sizes="any" href="figures/brand-mark\.svg">'; Message = "Brand mark must be used as the browser tab icon." },
   @{ Pattern = '<title>Sechan Oh Homepage</title>'; Message = "Browser tab title should be concise and homepage-oriented." },
   @{ Pattern = 'content/site-config\.js'; Message = "index.html must load the editable content config." },
   @{ Pattern = 'class="theme-toggle single-toggle"'; Message = "Theme must use one toggle control." },
@@ -93,7 +93,7 @@ $requirements = @(
   @{ Pattern = 'May 29, 2026'; Message = "Homepage must show the current update date." },
   @{ Pattern = '--bg:\s*#e5edd6'; Message = "Light theme should use a more distinctive sage background." },
   @{ Pattern = '--bg:\s*#091813'; Message = "Dark theme should use a richer ink-green background." },
-  @{ Pattern = '--min-readable:\s*12px'; Message = "Small text should have a defined readable minimum size." },
+  @{ Pattern = '--min-readable:\s*13px'; Message = "Small text should have a larger readable minimum size." },
   @{ Pattern = 'border-radius: 50%'; Message = "Profile photo must be displayed in a circular frame." },
   @{ Pattern = '--portrait-size'; Message = "Profile photo size must be controlled and smaller than the prior card." },
   @{ Pattern = 'object-fit: contain'; Message = "Profile photo should be contained so it is less cropped." },
@@ -139,7 +139,7 @@ if ($html -match '--bg:\s*#020403' -or $html -match '--bg:\s*#f2f4ee') {
   throw "Theme backgrounds should avoid near-black and near-white extremes."
 }
 
-if ($html -match 'font-size:\s*(9|10|11)px' -or $html -match 'font:\s*[^;]*(9|10|11)px') {
+if ($html -match 'font-size:\s*(9|10|11|12)px' -or $html -match 'font:\s*[^;]*(9|10|11|12)px') {
   throw "Small text should not fall below the readable minimum size."
 }
 
@@ -171,11 +171,11 @@ if ($html -notmatch '@media \(max-width: 560px\)[\s\S]*?\.profile-signals-body\s
   throw "Mobile profile signal copy should sit below the photo and name row."
 }
 
-if ($html -notmatch '@media \(max-width: 560px\)[\s\S]*?\.profile-panel\s*\{[^}]*column-gap:\s*24px[^}]*row-gap:\s*24px') {
+if ($html -notmatch '@media \(max-width: 560px\)[\s\S]*?\.profile-panel\s*\{[^}]*column-gap:\s*30px[^}]*row-gap:\s*24px') {
   throw "Mobile profile needs more space between photo/name and the signal copy."
 }
 
-if ($html -notmatch '@media \(max-width: 560px\)[\s\S]*?--portrait-size:\s*116px') {
+if ($html -notmatch '@media \(max-width: 560px\)[\s\S]*?--portrait-size:\s*120px') {
   throw "Small mobile profile photo should be slightly larger."
 }
 

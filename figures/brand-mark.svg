@@ -1,8 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Sechan Oh signal systems mark">
-  <rect width="64" height="64" rx="32" fill="#07130d"/>
-  <circle cx="32" cy="32" r="20" fill="none" stroke="#62f0a8" stroke-width="2.2" opacity=".58"/>
-  <circle cx="32" cy="32" r="8" fill="none" stroke="#62f0a8" stroke-width="2.2"/>
-  <path d="M32 32 L48 18" stroke="#62f0a8" stroke-width="2.8" stroke-linecap="round"/>
-  <circle cx="32" cy="32" r="3.8" fill="#62f0a8"/>
-  <circle cx="48" cy="18" r="3.2" fill="#62f0a8"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Insight sharing favicon, deep teal + ice mint">
+  <title>Insight Sharing Favicon</title>
+  <desc>Bold left-facing human head silhouette with a three-node share icon inside. Transparent background.</desc>
+  <path d="M 815 100
+C 930 145 975 255 950 370
+C 930 455 875 495 855 585
+C 845 630 850 770 850 940
+L 420 940
+L 420 840
+C 420 815 405 800 380 800
+L 245 800
+C 185 800 150 765 150 710
+L 150 610
+C 150 590 138 578 118 578
+L 92 578
+C 60 578 36 557 32 527
+C 29 502 39 482 57 464
+L 145 373
+C 165 353 175 328 175 300
+L 175 232
+C 175 175 218 132 285 112
+C 430 67 675 45 815 100 Z" fill="#007C7A"/>
+  <g fill="#E8FFF6">
+    <path d="M470 350 L707 205 L735 250 L498 395 Z"/>
+    <path d="M470 450 L707 605 L735 560 L498 405 Z"/>
+    <circle cx="455" cy="400" r="70"/>
+    <circle cx="745" cy="225" r="70"/>
+    <circle cx="745" cy="585" r="70"/>
+  </g>
+  <g fill="#007C7A">
+    <circle cx="455" cy="400" r="23"/>
+    <circle cx="745" cy="225" r="23"/>
+    <circle cx="745" cy="585" r="23"/>
+  </g>
 </svg>
