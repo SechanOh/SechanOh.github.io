@@ -66,9 +66,13 @@ $requirements = @(
   @{ Pattern = 'class="nav-links"'; Message = "Navigation links must be grouped separately from controls." },
   @{ Pattern = 'class="nav-controls"'; Message = "Theme and language controls must be grouped at the far right." },
   @{ Pattern = 'class="profile-panel hero-profile"'; Message = "Profile panel must be placed before the hero copy." },
-  @{ Pattern = 'class="profile-photo"'; Message = "Profile photo must be the left side of the profile panel." },
-  @{ Pattern = 'class="profile-signals"'; Message = "Signal capabilities must be the right side of the profile panel." },
+  @{ Pattern = 'class="profile-photo module-card"'; Message = "Profile photo must use the shared module card design." },
+  @{ Pattern = 'class="profile-signals module-card"'; Message = "Signal capabilities must use the shared module card design." },
+  @{ Pattern = 'class="profile-meta"'; Message = "Profile name and caption should live in the right profile module." },
   @{ Pattern = 'class="hero-copy"'; Message = "Hero copy must be explicitly separated after the profile block." },
+  @{ Pattern = '\.module-card\s*\{[^}]*border:\s*1px solid var\(--line\)'; Message = "Homepage modules must share one bordered card design." },
+  @{ Pattern = '\.module-card\s*\{[^}]*border-radius:\s*8px'; Message = "Homepage modules must share the same card radius." },
+  @{ Pattern = '\.module-card\s*\{[^}]*background:\s*var\(--surface\)'; Message = "Homepage modules must share the same surface treatment." },
   @{ Pattern = 'position:\s*sticky'; Message = "Header must remain sticky while scrolling." },
   @{ Pattern = '\.section-head\s*\{[^}]*display:\s*grid'; Message = "Section headings should stack title and copy vertically." },
   @{ Pattern = 'prefers-color-scheme: dark'; Message = "Default theme must follow the system color scheme." },
@@ -121,10 +125,6 @@ if ($html -match 'Multi-modal reasoning across imperfect measurements, timing, a
   throw "Sensor fusion copy is too long for the mobile side-by-side profile panel."
 }
 
-if ($html -match '@media \(max-width: 880px\)[\s\S]*?\.profile-panel\s*\{[^}]*grid-template-columns:\s*1fr') {
-  throw "Profile panel should remain side-by-side on mobile."
-}
-
 if ($html -match '\.brand-text\s*\{\s*display:\s*none') {
   throw "Brand text should remain visible on mobile."
 }
@@ -139,6 +139,10 @@ if ($html -match '\.portrait-caption\s+span:last-child\s*\{[^}]*display:\s*none'
 
 if ($html -match 'profile-signals-head') {
   throw "Profile signal panel should not repeat the name and perception systems label."
+}
+
+if ($html -match '<figure class="profile-photo module-card">[\s\S]*?<figcaption') {
+  throw "Profile caption should be positioned in the right module, not below the photo."
 }
 
 if ($html -match '\.section-head\s*\{[^}]*display:\s*flex') {
