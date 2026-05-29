@@ -80,7 +80,7 @@ $requirements = @(
   @{ Pattern = '\.hero-copy\s*\{[^}]*width:\s*100%'; Message = "Hero copy should use the same available width as the module sections." },
   @{ Pattern = '\.hero-copy\s*\{[^}]*max-width:\s*none'; Message = "Hero copy should not feel narrower than other modules." },
   @{ Pattern = '\.section-head p\s*\{[^}]*max-width:\s*none'; Message = "Section intro copy should use the full available content width." },
-  @{ Pattern = 'padding:\s*22px 28px'; Message = "Sticky header should include stronger horizontal breathing room outside narrow mobile." },
+  @{ Pattern = 'padding:\s*22px 3%'; Message = "Sticky header should use percentage-based horizontal breathing room outside narrow mobile." },
   @{ Pattern = '\.section-title-group\s*\{[^}]*display:\s*grid'; Message = "Section kicker and title spacing should use one shared title group." },
   @{ Pattern = 'class="section-title-group"'; Message = "Work and Notes headings should use the shared title spacing group." },
   @{ Pattern = '\.module-card\s*\{[^}]*border:\s*1px solid var\(--line\)'; Message = "Homepage modules must share one bordered card design." },
@@ -91,6 +91,8 @@ $requirements = @(
   @{ Pattern = 'prefers-color-scheme: dark'; Message = "Default theme must follow the system color scheme." },
   @{ Pattern = 'class="brand-link" href="/"'; Message = "Brand mark must link back to the homepage." },
   @{ Pattern = 'class="brand-glyph"'; Message = "Brand mark must include a designed glyph." },
+  @{ Pattern = 'object-fit:\s*contain'; Message = "Brand mark should preserve its original SVG proportions." },
+  @{ Pattern = 'aspect-ratio:\s*1'; Message = "Brand mark should render in a square aspect ratio." },
   @{ Pattern = 'Last updated'; Message = "Homepage must visibly show a maintenance/update date." },
   @{ Pattern = 'May 29, 2026'; Message = "Homepage must show the current update date." },
   @{ Pattern = '--bg:\s*#e5edd6'; Message = "Light theme should use a more distinctive sage background." },
@@ -103,7 +105,7 @@ $requirements = @(
   @{ Pattern = 'autoplay=1'; Message = "YouTube background must request autoplay." },
   @{ Pattern = 'mute=1'; Message = "YouTube background must default to muted." },
   @{ Pattern = 'youtubeId'; Message = "Media replacement should be controlled through a YouTube id config." },
-  @{ Pattern = 'Radar Signal Processing'; Message = "Homepage must present the radar signal processing identity." },
+  @{ Pattern = 'Radar processing'; Message = "Homepage must present the radar processing identity." },
   @{ Pattern = 'Sensor Fusion'; Message = "Homepage must present the sensor fusion identity." }
 )
 
@@ -157,6 +159,14 @@ if ($html -notmatch '@media \(max-width: 560px\)[\s\S]*?header\s*\{[^}]*padding:
   throw "Very narrow mobile header should remove horizontal padding."
 }
 
+if ($html -notmatch '@media \(max-width: 560px\)[\s\S]*?\.profile-panel\s*\{[^}]*padding-inline:\s*4%') {
+  throw "Mobile profile should add balanced left and right breathing room."
+}
+
+if ($html -match 'padding:\s*22px [0-9]+px') {
+  throw "Header horizontal padding should not be fixed in pixels outside narrow mobile."
+}
+
 if ($html -match 'Detection, estimation, filtering, tracking, and interpretation under ambiguity') {
   throw "Radar processing copy is too long for the mobile side-by-side profile panel."
 }
@@ -193,12 +203,12 @@ if ($html -match 'Multi-modal reasoning across imperfect measurements, timing, a
   throw "Sensor fusion copy is too long for the mobile side-by-side profile panel."
 }
 
-if ($html -match '\.brand-text\s*\{\s*display:\s*none') {
-  throw "Brand text should remain visible on mobile."
+if ($html -match 'class="brand-text"' -or $html -match 'data-content="brandName" data-i18n="brandName"') {
+  throw "Header brand should show only the SVG mark, not adjacent text."
 }
 
-if ($html -match '\.brand-text\s+span:last-child\s*\{[^}]*display:\s*none') {
-  throw "Brand subtitle should remain visible on mobile."
+if ($html -match 'class="eyebrow"' -or $html -match 'data-i18n="eyebrow"') {
+  throw "Hero eyebrow text should be removed."
 }
 
 if ($html -match '\.portrait-caption\s+span:last-child\s*\{[^}]*display:\s*none') {
@@ -229,6 +239,10 @@ foreach ($pattern in @('brandName', 'brandSubtitle', 'profileImage', 'youtubeId'
   if ($content -notmatch $pattern) {
     throw "content\site-config.js must expose $pattern for easy editing."
   }
+}
+
+if ((Get-Content -Raw -Path $brandMarkPath) -notmatch 'preserveAspectRatio="xMidYMid meet"') {
+  throw "Brand mark SVG must explicitly preserve its original aspect ratio."
 }
 
 foreach ($pattern in @('Homepage change request', 'request_type', 'Mobile context', 'Acceptance criteria', 'codex-homepage')) {

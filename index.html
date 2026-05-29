@@ -134,7 +134,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      padding: 22px 28px;
+      padding: 22px 3%;
       background: var(--bg);
       border-bottom: 1px solid var(--line);
       font-family: var(--mono);
@@ -154,20 +154,11 @@
     .brand-glyph {
       width: 32px;
       height: 32px;
+      aspect-ratio: 1;
+      object-fit: contain;
       border-radius: 50%;
       box-shadow: 0 12px 26px var(--shadow);
       display: block;
-    }
-
-    .brand-text {
-      display: grid;
-      gap: 2px;
-    }
-
-    .brand-text span:last-child {
-      color: var(--muted);
-      font-size: var(--min-readable);
-      text-transform: uppercase;
     }
 
     nav {
@@ -386,13 +377,6 @@
       flex-wrap: wrap;
     }
 
-    .eyebrow {
-      margin: 0 0 18px;
-      color: var(--signal);
-      font: 700 13px/1.4 var(--mono);
-      text-transform: uppercase;
-    }
-
     .hero-copy {
       width: 100%;
       max-width: none;
@@ -591,7 +575,6 @@
       header { gap: 8px; padding: 22px 0; }
       .brand-glyph { width: 28px; height: 28px; }
       .brand-link { gap: 7px; }
-      .brand-text { font-size: var(--min-readable); }
       nav { margin-left: auto; justify-content: flex-end; }
       .nav-links { gap: 8px; }
       .single-toggle { width: 38px; height: 22px; }
@@ -603,6 +586,7 @@
         grid-template-columns: auto minmax(0, 1fr);
         column-gap: 30px;
         row-gap: 24px;
+        padding-inline: 4%;
       }
       .profile-photo { min-height: 100%; }
       .profile-signals-body { grid-column: 1 / -1; padding-top: 18px; }
@@ -618,10 +602,6 @@
     <header>
       <a class="brand-link" href="/" aria-label="Go to Sechan Oh homepage">
         <img class="brand-glyph" src="figures/brand-mark.svg" alt="" aria-hidden="true">
-        <span class="brand-text">
-          <span data-content="brandName" data-i18n="brandName">Sechan Oh</span>
-          <span data-content="brandSubtitle" data-i18n="brandSubtitle">signal systems</span>
-        </span>
       </a>
       <nav aria-label="Primary navigation">
         <div class="nav-links">
@@ -667,7 +647,6 @@
         </aside>
 
         <div class="hero-copy">
-          <p class="eyebrow" data-i18n="eyebrow">Radar Signal Processing / Sensor Fusion</p>
           <h1 data-i18n="headline">Engineering signal from uncertainty.</h1>
           <p class="summary" data-i18n="summary">
             I design perception systems that turn radar returns, sensor streams, and noisy environments into decisions that hold up in the real world.
@@ -767,7 +746,6 @@
         radarBody: "I turn raw radar returns into stable detections, tracks, and interpretable motion cues.",
         fusionTitle: "Sensor fusion",
         fusionBody: "I align imperfect sensors into one confidence-aware view of the scene.",
-        eyebrow: "Radar Signal Processing / Sensor Fusion",
         headline: "Engineering signal from uncertainty.",
         summary: "I design perception systems that turn radar returns, sensor streams, and noisy environments into decisions that hold up in the real world.",
         ctaWork: "View selected work",
@@ -805,7 +783,6 @@
         radarBody: "원시 레이더 반사를 안정적인 탐지, 추적, 해석 가능한 움직임 단서로 바꿉니다.",
         fusionTitle: "Sensor fusion",
         fusionBody: "완벽하지 않은 센서들을 시간과 신뢰도 기준으로 정렬해 하나의 장면 이해로 묶습니다.",
-        eyebrow: "레이더 신호 처리 / 센서 퓨전",
         headline: "불확실성 속에서 신호를 설계합니다.",
         summary: "레이더 반사, 센서 스트림, 노이즈 많은 환경을 현실에서 버틸 수 있는 판단으로 바꾸는 인지 시스템을 설계합니다.",
         ctaWork: "작업 보기",
