@@ -79,6 +79,8 @@ $requirements = @(
   @{ Pattern = 'class="hero-copy"'; Message = "Hero copy must be explicitly separated after the profile block." },
   @{ Pattern = '\.hero-copy\s*\{[^}]*width:\s*100%'; Message = "Hero copy should use the same available width as the module sections." },
   @{ Pattern = '\.hero-copy\s*\{[^}]*max-width:\s*none'; Message = "Hero copy should not feel narrower than other modules." },
+  @{ Pattern = '\.section-head p\s*\{[^}]*max-width:\s*none'; Message = "Section intro copy should use the full available content width." },
+  @{ Pattern = 'padding:\s*22px 18px'; Message = "Sticky header should include horizontal breathing room." },
   @{ Pattern = '\.section-title-group\s*\{[^}]*display:\s*grid'; Message = "Section kicker and title spacing should use one shared title group." },
   @{ Pattern = 'class="section-title-group"'; Message = "Work and Notes headings should use the shared title spacing group." },
   @{ Pattern = '\.module-card\s*\{[^}]*border:\s*1px solid var\(--line\)'; Message = "Homepage modules must share one bordered card design." },
@@ -133,6 +135,10 @@ if ($html -match 'mediaConfig\.youtubeId<br>replace YouTube ID later') {
 
 if ($html -match 'max-width:\s*820px' -or $html -match 'max-width:\s*730px') {
   throw "Hero headline and summary should not keep narrow standalone max-widths."
+}
+
+if ($html -match '\.section-head p\s*\{[^}]*max-width:\s*[0-9]') {
+  throw "Section intro copy should not use a narrow max-width."
 }
 
 if ($html -match '--bg:\s*#020403' -or $html -match '--bg:\s*#f2f4ee') {
