@@ -91,6 +91,8 @@ $requirements = @(
   @{ Pattern = 'class="brand-glyph"'; Message = "Brand mark must include a designed glyph." },
   @{ Pattern = 'Last updated'; Message = "Homepage must visibly show a maintenance/update date." },
   @{ Pattern = 'May 29, 2026'; Message = "Homepage must show the current update date." },
+  @{ Pattern = '--bg:\s*#e8eee2'; Message = "Light theme should use a warmer sage background, not plain white." },
+  @{ Pattern = '--bg:\s*#07110d'; Message = "Dark theme should use an ink-green background, not pure black." },
   @{ Pattern = 'border-radius: 50%'; Message = "Profile photo must be displayed in a circular frame." },
   @{ Pattern = '--portrait-size'; Message = "Profile photo size must be controlled and smaller than the prior card." },
   @{ Pattern = 'object-fit: contain'; Message = "Profile photo should be contained so it is less cropped." },
@@ -132,6 +134,10 @@ if ($html -match 'max-width:\s*820px' -or $html -match 'max-width:\s*730px') {
   throw "Hero headline and summary should not keep narrow standalone max-widths."
 }
 
+if ($html -match '--bg:\s*#020403' -or $html -match '--bg:\s*#f2f4ee') {
+  throw "Theme backgrounds should avoid near-black and near-white extremes."
+}
+
 if ($html -match 'Detection, estimation, filtering, tracking, and interpretation under ambiguity') {
   throw "Radar processing copy is too long for the mobile side-by-side profile panel."
 }
@@ -158,6 +164,10 @@ if ($html -notmatch '@media \(max-width: 560px\)[\s\S]*?\.profile-signals-body\s
 
 if ($html -notmatch '@media \(max-width: 560px\)[\s\S]*?\.profile-panel\s*\{[^}]*column-gap:\s*18px[^}]*row-gap:\s*22px') {
   throw "Mobile profile needs more space between photo/name and the signal copy."
+}
+
+if ($html -notmatch '@media \(max-width: 560px\)[\s\S]*?--portrait-size:\s*112px') {
+  throw "Small mobile profile photo should be slightly larger."
 }
 
 if ($html -match 'Multi-modal reasoning across imperfect measurements, timing, and confidence') {
