@@ -91,10 +91,8 @@ $requirements = @(
   @{ Pattern = 'position:\s*sticky'; Message = "Header must remain sticky while scrolling." },
   @{ Pattern = '\.section-head\s*\{[^}]*display:\s*grid'; Message = "Section headings should stack title and copy vertically." },
   @{ Pattern = 'prefers-color-scheme: dark'; Message = "Default theme must follow the system color scheme." },
-  @{ Pattern = 'class="brand-link" href="/"'; Message = "Brand mark must link back to the homepage." },
-  @{ Pattern = 'class="brand-glyph"'; Message = "Brand mark must include a designed glyph." },
-  @{ Pattern = 'object-fit:\s*contain'; Message = "Brand mark should preserve its original SVG proportions." },
-  @{ Pattern = 'aspect-ratio:\s*1'; Message = "Brand mark should render in a square aspect ratio." },
+  @{ Pattern = 'class="brand-link" href="/"'; Message = "Header brand must link back to the homepage." },
+  @{ Pattern = 'class="brand-name"'; Message = "Header brand should show the Sechan Oh text label." },
   @{ Pattern = 'Last updated'; Message = "Homepage must visibly show a maintenance/update date." },
   @{ Pattern = 'May 29, 2026'; Message = "Homepage must show the current update date." },
   @{ Pattern = '--bg:\s*#e5edd6'; Message = "Light theme should use a more distinctive sage background." },
@@ -209,8 +207,8 @@ if ($html -match 'Multi-modal reasoning across imperfect measurements, timing, a
   throw "Sensor fusion copy is too long for the mobile side-by-side profile panel."
 }
 
-if ($html -match 'class="brand-text"' -or $html -match 'data-content="brandName" data-i18n="brandName"') {
-  throw "Header brand should show only the SVG mark, not adjacent text."
+if ($html -match 'class="brand-glyph"') {
+  throw "Header brand should not show the favicon SVG mark."
 }
 
 if ($html -match 'class="eyebrow"' -or $html -match 'data-i18n="eyebrow"') {

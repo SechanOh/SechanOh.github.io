@@ -151,14 +151,11 @@
       text-decoration: none;
     }
 
-    .brand-glyph {
-      width: 32px;
-      height: 32px;
-      aspect-ratio: 1;
-      object-fit: contain;
-      border-radius: 50%;
-      box-shadow: 0 12px 26px var(--shadow);
-      display: block;
+    .brand-name {
+      color: var(--text);
+      font: 800 14px/1 var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
     }
 
     nav {
@@ -576,7 +573,6 @@
     @media (max-width: 560px) {
       .shell { width: min(100% - 18px, 620px); }
       header { gap: 8px; padding: 22px 0; }
-      .brand-glyph { width: 28px; height: 28px; }
       .brand-link { gap: 7px; }
       nav { margin-left: auto; justify-content: flex-end; }
       .nav-links { gap: 8px; }
@@ -604,7 +600,7 @@
   <div class="shell">
     <header>
       <a class="brand-link" href="/" aria-label="Go to Sechan Oh homepage">
-        <img class="brand-glyph" src="figures/brand-mark.svg" alt="" aria-hidden="true">
+        <span class="brand-name">Sechan Oh</span>
       </a>
       <nav aria-label="Primary navigation">
         <div class="nav-links">
@@ -822,7 +818,6 @@
     const storedTheme = localStorage.getItem("theme-preference") || "";
     const heroMedia = document.querySelector("#hero-media");
     const profileImage = document.querySelector(".portrait-frame img");
-    const brandMark = document.querySelector(".brand-glyph");
     const updatedTime = document.querySelector("time[data-content='lastUpdatedLabel']");
     const languageCode = document.querySelector(".language-code");
 
@@ -873,10 +868,6 @@
 
     if (mediaConfig.profileImage) {
       profileImage.src = mediaConfig.profileImage;
-    }
-
-    if (mediaConfig.brandMark) {
-      brandMark.src = mediaConfig.brandMark;
     }
 
     if (siteContent.lastUpdatedDate) {
