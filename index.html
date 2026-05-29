@@ -219,17 +219,16 @@
       box-shadow: inset 0 0 0 2px rgba(98, 240, 168, .18);
     }
 
-    .language-orb {
-      background: #f5f7ef;
-      box-shadow: inset 0 0 0 2px rgba(12, 122, 77, .18);
-      display: grid;
-      place-items: center;
-      color: #0c7a4d;
-      font: 800 7px/1 var(--mono);
+    .language-toggle {
+      justify-content: center;
     }
 
-    [data-theme="light"] .theme-orb,
-    .single-toggle[data-lang-current="ko"] .language-orb {
+    .language-code {
+      color: var(--signal);
+      font: 800 10px/1 var(--mono);
+    }
+
+    [data-theme="light"] .theme-orb {
       transform: translateX(18px);
     }
 
@@ -248,6 +247,127 @@
     .hero-stack {
       display: grid;
       gap: clamp(28px, 4vw, 46px);
+    }
+
+    .content-sections {
+      display: grid;
+      gap: 44px;
+    }
+
+    .section-band {
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    .section-kicker {
+      margin: 0 0 8px;
+      color: var(--signal);
+      font: 700 12px/1.3 var(--mono);
+      text-transform: uppercase;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font: 700 clamp(25px, 4vw, 42px)/1.05 var(--serif);
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 520px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .content-card {
+      min-height: 190px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 16px 36px var(--shadow);
+      padding: 18px;
+      display: grid;
+      align-content: start;
+      gap: 12px;
+    }
+
+    .content-card h3 {
+      margin: 0;
+      color: var(--text);
+      font: 700 16px/1.25 var(--mono);
+    }
+
+    .content-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .visual-line {
+      height: 4px;
+      width: 54px;
+      border-radius: 999px;
+      background: var(--signal);
+      box-shadow: 0 0 18px var(--signal);
+    }
+
+    .note-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .note-item,
+    .contact-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 16px 36px var(--shadow);
+      padding: 18px;
+    }
+
+    .note-item {
+      display: grid;
+      grid-template-columns: minmax(160px, .35fr) 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .note-item strong {
+      color: var(--text);
+      font: 700 15px/1.3 var(--mono);
+    }
+
+    .note-item p,
+    .contact-panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .eyebrow {
@@ -427,27 +547,6 @@
       line-height: 1.45;
     }
 
-    .media-strip {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .media-slot {
-      min-height: 118px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background:
-        linear-gradient(135deg, var(--signal-soft), transparent),
-        var(--surface);
-      display: grid;
-      align-content: end;
-      padding: 12px;
-      color: var(--muted);
-      font: 700 12px/1.35 var(--mono);
-      box-shadow: 0 16px 36px var(--shadow);
-    }
-
     footer {
       display: flex;
       justify-content: space-between;
@@ -468,7 +567,10 @@
       nav a { font-size: 11px; }
       .hero-stack { align-items: start; }
       main { align-content: start; padding-top: 32px; }
-      .media-strip { grid-template-columns: 1fr; }
+      .card-grid { grid-template-columns: 1fr; }
+      .section-head,
+      .note-item,
+      .contact-panel { grid-template-columns: 1fr; display: grid; align-items: start; }
       h1 { font-size: clamp(38px, 11vw, 58px); }
       .summary { font-size: 18px; }
       .profile-panel { --portrait-size: 116px; grid-template-columns: auto minmax(0, 1fr); padding: 12px; gap: 10px; }
@@ -491,9 +593,8 @@
       .nav-links { gap: 8px; }
       .single-toggle { width: 38px; height: 22px; }
       .toggle-orb { width: 14px; height: 14px; }
-      .language-orb { font-size: 6px; }
-      [data-theme="light"] .theme-orb,
-      .single-toggle[data-lang-current="ko"] .language-orb { transform: translateX(16px); }
+      .language-code { font-size: 9px; }
+      [data-theme="light"] .theme-orb { transform: translateX(16px); }
       .actions { display: grid; }
       .button { justify-content: center; }
     }
@@ -507,22 +608,22 @@
       <a class="brand-link" href="/" aria-label="Go to Sechan Oh homepage">
         <img class="brand-glyph" src="figures/brand-mark.svg" alt="" aria-hidden="true">
         <span class="brand-text">
-          <span data-content="brandName">Sechan Oh</span>
-          <span data-content="brandSubtitle">signal systems</span>
+          <span data-content="brandName" data-i18n="brandName">Sechan Oh</span>
+          <span data-content="brandSubtitle" data-i18n="brandSubtitle">signal systems</span>
         </span>
       </a>
       <nav aria-label="Primary navigation">
         <div class="nav-links">
-          <a href="#work">Work</a>
-          <a href="#writing">Notes</a>
-          <a href="#contact">Contact</a>
+          <a href="#work" data-i18n="navWork">Work</a>
+          <a href="#writing" data-i18n="navNotes">Notes</a>
+          <a href="#contact" data-i18n="navContact">Contact</a>
         </div>
         <div class="nav-controls">
           <button type="button" class="theme-toggle single-toggle" aria-label="Toggle color theme" aria-pressed="false">
             <span class="toggle-orb theme-orb" aria-hidden="true"></span>
           </button>
           <button type="button" class="language-toggle single-toggle" aria-label="Toggle language" aria-pressed="false" data-lang-current="en">
-            <span class="toggle-orb language-orb" aria-hidden="true"><span class="language-code">EN</span></span>
+            <span class="language-code">EN</span>
           </button>
         </div>
       </nav>
@@ -536,52 +637,109 @@
               <img src="figures/SechanOh_picture.jpg" alt="Portrait of Sechan Oh">
             </div>
             <figcaption class="portrait-caption">
-              <span>Sechan Oh</span>
-              <span>perception systems</span>
+              <span data-i18n="brandName">Sechan Oh</span>
+              <span data-i18n="profileCaption">perception systems</span>
             </figcaption>
           </figure>
 
           <div class="profile-signals">
             <div class="profile-signals-head">
-              <span>signal dossier</span>
-              <span>live profile</span>
+              <span data-i18n="brandName">Sechan Oh</span>
+              <span data-i18n="profileCaption">perception systems</span>
             </div>
             <div class="profile-signals-body">
               <div class="signal-card">
                 <span class="dot"></span>
-                <p><strong>Radar processing</strong><span>Detection, filtering, tracking.</span></p>
+                <p><strong data-i18n="radarTitle">Radar processing</strong><span data-i18n="radarBody">I turn raw radar returns into stable detections, tracks, and interpretable motion cues.</span></p>
               </div>
               <div class="signal-card">
                 <span class="dot"></span>
-                <p><strong>Sensor fusion</strong><span>Timing, confidence, decisions.</span></p>
+                <p><strong data-i18n="fusionTitle">Sensor fusion</strong><span data-i18n="fusionBody">I align imperfect sensors into one confidence-aware view of the scene.</span></p>
               </div>
             </div>
           </div>
         </aside>
 
         <div class="hero-copy">
-          <p class="eyebrow">Radar Signal Processing / Sensor Fusion</p>
-          <h1>Engineering signal from uncertainty.</h1>
-          <p class="summary">
+          <p class="eyebrow" data-i18n="eyebrow">Radar Signal Processing / Sensor Fusion</p>
+          <h1 data-i18n="headline">Engineering signal from uncertainty.</h1>
+          <p class="summary" data-i18n="summary">
             I design perception systems that turn radar returns, sensor streams, and noisy environments into decisions that hold up in the real world.
           </p>
           <div class="actions">
-            <a class="button primary" href="#work">View selected work</a>
-            <a class="button" href="#contact">Start a conversation</a>
+            <a class="button primary" href="#work" data-i18n="ctaWork">View selected work</a>
+            <a class="button" href="#contact" data-i18n="ctaContact">Start a conversation</a>
           </div>
         </div>
       </section>
 
-      <section class="media-strip" aria-label="Replaceable media slots">
-        <div class="media-slot">mediaConfig.youtubeId<br>replace YouTube ID later</div>
-        <div class="media-slot">mediaConfig.profileImage<br>swap profile image path</div>
-        <div class="media-slot">mediaConfig.workVisual<br>drop in project image/video</div>
+      <section class="content-sections" aria-label="Homepage sections">
+        <section class="section-band" id="work">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker" data-i18n="workKicker">Selected work</p>
+              <h2 data-i18n="workTitle">Systems built around signal, timing, and confidence.</h2>
+            </div>
+            <p data-i18n="workIntro">The work I want this homepage to represent: engineering that respects noisy data, physical constraints, and decisions that need to survive outside a clean demo.</p>
+          </div>
+          <div class="card-grid">
+            <article class="content-card">
+              <span class="visual-line"></span>
+              <h3 data-i18n="workCard1Title">Signal chain design</h3>
+              <p data-i18n="workCard1Body">From preprocessing and detection thresholds to track-level behavior, I care about the full path from measurement to decision.</p>
+            </article>
+            <article class="content-card">
+              <span class="visual-line"></span>
+              <h3 data-i18n="workCard2Title">Fusion architecture</h3>
+              <p data-i18n="workCard2Body">I design interfaces where time alignment, confidence, and failure modes are explicit instead of hidden in glue code.</p>
+            </article>
+            <article class="content-card">
+              <span class="visual-line"></span>
+              <h3 data-i18n="workCard3Title">Perception validation</h3>
+              <p data-i18n="workCard3Body">I like systems that can explain why they trusted a signal, ignored a measurement, or changed a track.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section-band" id="writing">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker" data-i18n="notesKicker">Notes</p>
+              <h2 data-i18n="notesTitle">Technical notes worth expanding.</h2>
+            </div>
+            <p data-i18n="notesIntro">These are placeholders for the kind of writing that should live here: short, technical, and grounded in engineering judgment.</p>
+          </div>
+          <div class="note-list">
+            <article class="note-item">
+              <strong data-i18n="note1Title">Tracking under uncertainty</strong>
+              <p data-i18n="note1Body">How gating, filtering, and confidence handling shape whether a perception system feels reliable or fragile.</p>
+            </article>
+            <article class="note-item">
+              <strong data-i18n="note2Title">When sensors disagree</strong>
+              <p data-i18n="note2Body">Fusion is less about averaging inputs and more about making disagreement visible, weighted, and recoverable.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section-band" id="contact">
+          <div class="contact-panel">
+            <div>
+              <p class="section-kicker" data-i18n="contactKicker">Contact</p>
+              <h2 data-i18n="contactTitle">Open to technical conversations.</h2>
+              <p data-i18n="contactBody">Reach out for radar signal processing, sensor fusion, perception systems, or research-minded engineering conversations.</p>
+            </div>
+            <div class="contact-links">
+              <a class="button primary" href="https://github.com/SechanOh">GitHub</a>
+              <a class="button" href="mailto:">Email</a>
+            </div>
+          </div>
+        </section>
       </section>
     </main>
 
     <footer>
-      <span>Built as a replaceable-media personal brand system.</span>
-      <span>Last updated <time datetime="2026-05-29" data-content="lastUpdatedLabel">May 29, 2026</time></span>
+      <span data-i18n="footerBuilt">Built as a replaceable-media personal brand system.</span>
+      <span><span data-i18n="footerUpdated">Last updated</span> <time datetime="2026-05-29" data-content="lastUpdatedLabel">May 29, 2026</time></span>
     </footer>
   </div>
 
@@ -589,6 +747,84 @@
   <script>
     const siteContent = window.siteContent || {};
     const mediaConfig = siteContent;
+    const translations = {
+      en: {
+        brandName: "Sechan Oh",
+        brandSubtitle: "signal systems",
+        navWork: "Work",
+        navNotes: "Notes",
+        navContact: "Contact",
+        profileCaption: "perception systems",
+        radarTitle: "Radar processing",
+        radarBody: "I turn raw radar returns into stable detections, tracks, and interpretable motion cues.",
+        fusionTitle: "Sensor fusion",
+        fusionBody: "I align imperfect sensors into one confidence-aware view of the scene.",
+        eyebrow: "Radar Signal Processing / Sensor Fusion",
+        headline: "Engineering signal from uncertainty.",
+        summary: "I design perception systems that turn radar returns, sensor streams, and noisy environments into decisions that hold up in the real world.",
+        ctaWork: "View selected work",
+        ctaContact: "Start a conversation",
+        workKicker: "Selected work",
+        workTitle: "Systems built around signal, timing, and confidence.",
+        workIntro: "The work I want this homepage to represent: engineering that respects noisy data, physical constraints, and decisions that need to survive outside a clean demo.",
+        workCard1Title: "Signal chain design",
+        workCard1Body: "From preprocessing and detection thresholds to track-level behavior, I care about the full path from measurement to decision.",
+        workCard2Title: "Fusion architecture",
+        workCard2Body: "I design interfaces where time alignment, confidence, and failure modes are explicit instead of hidden in glue code.",
+        workCard3Title: "Perception validation",
+        workCard3Body: "I like systems that can explain why they trusted a signal, ignored a measurement, or changed a track.",
+        notesKicker: "Notes",
+        notesTitle: "Technical notes worth expanding.",
+        notesIntro: "These are placeholders for the kind of writing that should live here: short, technical, and grounded in engineering judgment.",
+        note1Title: "Tracking under uncertainty",
+        note1Body: "How gating, filtering, and confidence handling shape whether a perception system feels reliable or fragile.",
+        note2Title: "When sensors disagree",
+        note2Body: "Fusion is less about averaging inputs and more about making disagreement visible, weighted, and recoverable.",
+        contactKicker: "Contact",
+        contactTitle: "Open to technical conversations.",
+        contactBody: "Reach out for radar signal processing, sensor fusion, perception systems, or research-minded engineering conversations.",
+        footerBuilt: "Built as a replaceable-media personal brand system.",
+        footerUpdated: "Last updated"
+      },
+      ko: {
+        brandName: "Sechan Oh",
+        brandSubtitle: "signal systems",
+        navWork: "작업",
+        navNotes: "노트",
+        navContact: "연락",
+        profileCaption: "perception systems",
+        radarTitle: "Radar processing",
+        radarBody: "원시 레이더 반사를 안정적인 탐지, 추적, 해석 가능한 움직임 단서로 바꿉니다.",
+        fusionTitle: "Sensor fusion",
+        fusionBody: "완벽하지 않은 센서들을 시간과 신뢰도 기준으로 정렬해 하나의 장면 이해로 묶습니다.",
+        eyebrow: "레이더 신호 처리 / 센서 퓨전",
+        headline: "불확실성 속에서 신호를 설계합니다.",
+        summary: "레이더 반사, 센서 스트림, 노이즈 많은 환경을 현실에서 버틸 수 있는 판단으로 바꾸는 인지 시스템을 설계합니다.",
+        ctaWork: "작업 보기",
+        ctaContact: "대화 시작",
+        workKicker: "Selected work",
+        workTitle: "신호, 시간, 신뢰도를 중심으로 만든 시스템.",
+        workIntro: "이 홈페이지가 보여줘야 할 작업은 명확합니다. 깨끗한 데모가 아니라 노이즈, 물리 제약, 실제 판단을 견디는 엔지니어링입니다.",
+        workCard1Title: "신호 처리 체계 설계",
+        workCard1Body: "전처리와 탐지 기준부터 트랙 수준 동작까지, 측정값이 판단이 되는 전체 경로를 설계합니다.",
+        workCard2Title: "퓨전 아키텍처",
+        workCard2Body: "시간 정렬, 신뢰도, 실패 모드가 숨겨지지 않고 인터페이스에 드러나는 구조를 선호합니다.",
+        workCard3Title: "인지 시스템 검증",
+        workCard3Body: "왜 어떤 신호를 믿었고, 어떤 측정을 버렸고, 왜 트랙이 바뀌었는지 설명 가능한 시스템을 지향합니다.",
+        notesKicker: "Notes",
+        notesTitle: "확장할 가치가 있는 기술 노트.",
+        notesIntro: "짧고 기술적이며 판단이 담긴 글을 쌓기 위한 자리입니다.",
+        note1Title: "불확실성 속의 추적",
+        note1Body: "게이팅, 필터링, 신뢰도 처리가 인지 시스템을 믿을 만하게도, 취약하게도 만듭니다.",
+        note2Title: "센서들이 서로 다를 때",
+        note2Body: "퓨전은 평균을 내는 일이 아니라 불일치를 드러내고, 가중하고, 회복 가능하게 만드는 일입니다.",
+        contactKicker: "Contact",
+        contactTitle: "기술적인 대화를 환영합니다.",
+        contactBody: "레이더 신호 처리, 센서 퓨전, 인지 시스템, 연구 지향 엔지니어링에 대해 편하게 연락해주세요.",
+        footerBuilt: "교체 가능한 미디어 구조의 퍼스널 브랜딩 시스템.",
+        footerUpdated: "업데이트"
+      }
+    };
 
     const root = document.documentElement;
     const themeToggle = document.querySelector(".theme-toggle");
@@ -598,6 +834,7 @@
     const profileImage = document.querySelector(".portrait-frame img");
     const brandMark = document.querySelector(".brand-glyph");
     const updatedTime = document.querySelector("time[data-content='lastUpdatedLabel']");
+    const languageCode = document.querySelector(".language-code");
 
     function setTheme(theme) {
       if (!theme) {
@@ -618,13 +855,24 @@
 
     languageToggle.addEventListener("click", () => {
       const nextLang = languageToggle.dataset.langCurrent === "en" ? "ko" : "en";
-      languageToggle.dataset.langCurrent = nextLang;
-      languageToggle.setAttribute("aria-pressed", String(nextLang === "ko"));
-      document.documentElement.lang = nextLang;
-      languageToggle.querySelector(".language-code").textContent = nextLang.toUpperCase();
+      setLanguage(nextLang);
     });
 
     setTheme(storedTheme);
+
+    function setLanguage(lang) {
+      const dictionary = translations[lang] || translations.en;
+      languageToggle.dataset.langCurrent = lang;
+      languageToggle.setAttribute("aria-pressed", String(lang === "ko"));
+      document.documentElement.lang = lang;
+      languageCode.textContent = lang.toUpperCase();
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        const key = node.dataset.i18n;
+        if (dictionary[key]) {
+          node.textContent = dictionary[key];
+        }
+      });
+    }
 
     document.querySelectorAll("[data-content]").forEach((node) => {
       const key = node.dataset.content;
@@ -644,6 +892,8 @@
     if (siteContent.lastUpdatedDate) {
       updatedTime.dateTime = siteContent.lastUpdatedDate;
     }
+
+    setLanguage("en");
 
     if (mediaConfig.youtubeId && mediaConfig.youtubeId !== "REPLACE_WITH_YOUTUBE_ID") {
       const iframe = document.createElement("iframe");

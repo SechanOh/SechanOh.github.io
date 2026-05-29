@@ -54,6 +54,15 @@ $requirements = @(
   @{ Pattern = 'data-lang-current="en"'; Message = "Homepage must track current language state." },
   @{ Pattern = 'class="language-code"'; Message = "Language toggle should show only the current language inside the orb." },
   @{ Pattern = 'class="hero-stack"'; Message = "Hero content must stack profile above the main statement." },
+  @{ Pattern = 'const translations ='; Message = "Homepage must include a translation dictionary." },
+  @{ Pattern = 'data-i18n='; Message = "Homepage text must be wired for language switching." },
+  @{ Pattern = 'id="work"'; Message = "Work navigation target section must exist." },
+  @{ Pattern = 'id="writing"'; Message = "Notes navigation target section must exist." },
+  @{ Pattern = 'id="contact"'; Message = "Contact navigation target section must exist." },
+  @{ Pattern = 'Signal chain design'; Message = "Work section should include substantial radar/sensor content." },
+  @{ Pattern = 'Tracking under uncertainty'; Message = "Notes section should include a technical note entry." },
+  @{ Pattern = 'Open to technical conversations'; Message = "Contact section should include a clear contact prompt." },
+  @{ Pattern = 'ko:\s*\{'; Message = "Korean content block must be present for language switching." },
   @{ Pattern = 'class="nav-links"'; Message = "Navigation links must be grouped separately from controls." },
   @{ Pattern = 'class="nav-controls"'; Message = "Theme and language controls must be grouped at the far right." },
   @{ Pattern = 'class="profile-panel hero-profile"'; Message = "Profile panel must be placed before the hero copy." },
@@ -96,6 +105,10 @@ if ($html -match 'data-lang-option="en"' -or $html -match 'data-lang-option="ko"
 
 if ($html -match 'content:\s*"EN"' -or $html -match 'content:\s*"KO"') {
   throw "Language toggle should not show both EN and KO labels."
+}
+
+if ($html -match 'mediaConfig\.youtubeId<br>replace YouTube ID later') {
+  throw "Placeholder media slots should be replaced by real homepage sections."
 }
 
 if ($html -match 'Detection, estimation, filtering, tracking, and interpretation under ambiguity') {
