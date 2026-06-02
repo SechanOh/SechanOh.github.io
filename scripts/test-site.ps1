@@ -83,8 +83,7 @@ $requirements = @(
   @{ Pattern = '\.hero-copy\s*\{[^}]*max-width:\s*none'; Message = "Hero copy should not feel narrower than other modules." },
   @{ Pattern = '\.section-head p\s*\{[^}]*max-width:\s*none'; Message = "Section intro copy should use the full available content width." },
   @{ Pattern = 'padding:\s*22px 3%'; Message = "Sticky header should use percentage-based horizontal breathing room outside narrow mobile." },
-  @{ Pattern = 'header\s*\{[^}]*radial-gradient\(circle at 72% 16%, var\(--signal-soft\), transparent 34%\)[^}]*linear-gradient\(180deg, var\(--bg\), var\(--bg\)\)'; Message = "Header background should match the page background treatment." },
-  @{ Pattern = 'header\s*\{[^}]*border-bottom:\s*1px solid var\(--line\)'; Message = "Header should keep the bottom separator line." },
+  @{ Pattern = 'header\s*\{[^}]*background:\s*var\(--bg\)'; Message = "Header background should match the page background." },
   @{ Pattern = '\.section-title-group\s*\{[^}]*display:\s*grid'; Message = "Section kicker and title spacing should use one shared title group." },
   @{ Pattern = 'class="section-title-group"'; Message = "Work and Notes headings should use the shared title spacing group." },
   @{ Pattern = '\.module-card\s*\{[^}]*border:\s*1px solid var\(--line\)'; Message = "Homepage modules must share one bordered card design." },
@@ -170,8 +169,8 @@ if ($html -match 'padding:\s*22px [0-9]+px') {
   throw "Header horizontal padding should not be fixed in pixels outside narrow mobile."
 }
 
-if ($html -match 'header\s*\{[^}]*background:\s*var\(--bg\)') {
-  throw "Header background should not use a flatter color than the page background."
+if ($html -match 'header\s*\{[^}]*border-bottom') {
+  throw "Header should not have a separate bottom border from the page background."
 }
 
 if ($html -match 'Detection, estimation, filtering, tracking, and interpretation under ambiguity') {
