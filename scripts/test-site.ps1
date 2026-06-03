@@ -98,6 +98,9 @@ $requirements = @(
   @{ Pattern = 'May 29, 2026'; Message = "Homepage must show the current update date." },
   @{ Pattern = '--bg:\s*#e5edd6'; Message = "Light theme should use a more distinctive sage background." },
   @{ Pattern = '--bg:\s*#091813'; Message = "Dark theme should use a richer ink-green background." },
+  @{ Pattern = '\.media-backdrop::after\s*\{[^}]*rgba\(229, 237, 214, \.95\)'; Message = "System light mode should use a light media overlay by default." },
+  @{ Pattern = '@media \(prefers-color-scheme: dark\)\s*\{[\s\S]*?\.media-backdrop::after\s*\{[^}]*rgba\(9, 24, 19, \.76\)'; Message = "System dark mode should use a dark media overlay." },
+  @{ Pattern = '\[data-theme="dark"\] \.media-backdrop::after\s*\{[^}]*rgba\(9, 24, 19, \.76\)'; Message = "Explicit dark mode should use a dark media overlay." },
   @{ Pattern = '--min-readable:\s*13px'; Message = "Small text should have a larger readable minimum size." },
   @{ Pattern = 'border-radius: 50%'; Message = "Profile photo must be displayed in a circular frame." },
   @{ Pattern = '--portrait-size'; Message = "Profile photo size must be controlled and smaller than the prior card." },
@@ -146,6 +149,14 @@ if ($html -match '\.section-head p\s*\{[^}]*max-width:\s*[0-9]') {
 
 if ($html -match '--bg:\s*#020403' -or $html -match '--bg:\s*#f2f4ee') {
   throw "Theme backgrounds should avoid near-black and near-white extremes."
+}
+
+if ($html -match '\.media-backdrop::after\s*\{[^}]*rgba\(2, 4, 3') {
+  throw "System light mode should not inherit the dark media overlay."
+}
+
+if ($html -match 'rgba\(242, 244, 238') {
+  throw "Light overlay should use the current light background palette."
 }
 
 if ($html -match 'font-size:\s*(9|10|11|12)px' -or $html -match 'font:\s*[^;]*(9|10|11|12)px') {
